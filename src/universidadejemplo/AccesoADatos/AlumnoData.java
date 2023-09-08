@@ -127,10 +127,11 @@ public class AlumnoData {
         }
     }
     
-    public void modificarAlumno(int id) {
+    public void eliminarAlumno(int id) {
         String sql = "UPDATE alumno SET estado= 0 WHERE idAlumno = ?;";
         PreparedStatement ps = null;
         try {
+            ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
             int exito = ps.executeUpdate();

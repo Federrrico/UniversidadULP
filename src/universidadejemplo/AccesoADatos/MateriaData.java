@@ -6,7 +6,6 @@
 package universidadejemplo.AccesoADatos;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,6 +74,7 @@ public class MateriaData {
         String sql = "UPDATE materia SET nombre= ?, año= ? WHERE idMateria = ?;";
         PreparedStatement ps = null;
         try {
+            ps = con.prepareStatement(sql);
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAño());
             ps.setInt(3, materia.getIdMateria());
@@ -96,6 +96,7 @@ public class MateriaData {
         String sql = "UPDATE materia SET estado= 0 WHERE idMateria = ?;";
         PreparedStatement ps = null;
         try {
+            ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
             int exito = ps.executeUpdate();
