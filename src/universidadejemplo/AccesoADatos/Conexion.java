@@ -31,9 +31,9 @@ public class Conexion {
             try {
                 //cargamos las clases de mariadb que implementan JDBC
                 Class.forName("org.mariadb.jdbc.Driver");
-                //"jdbc.mariadb://localhost:3306/'base de datos'", "root", "")
-                connection = DriverManager.getConnection(URL+DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC" +
-                "&user=" + USUARIO + "&password=" + PASSWORD);
+//                connection = DriverManager.getConnection(URL+DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC" +
+//                "&user=" + USUARIO + "&password=" + PASSWORD);
+                connection = DriverManager.getConnection(URL+DB,USUARIO,PASSWORD);
             } catch (SQLException | ClassNotFoundException ex) {  // si me olvide de importar la libreria // error al cargar los drivers
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             }
