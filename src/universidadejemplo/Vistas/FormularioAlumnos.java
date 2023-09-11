@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package universidadejemplo.Vistas;
+import java.sql.Connection;
+import universidadejemplo.AccesoADatos.AlumnoData;
+import universidadejemplo.AccesoADatos.Conexion;
+import universidadejemplo.Entidades.Alumno;
 
 /**
  *
@@ -57,6 +61,12 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Estado:");
 
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Fecha de nacimiento:");
 
         jBuscar.setText("Buscar");
@@ -66,6 +76,11 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         jElimiinar.setText("Eliminar");
 
         jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
 
@@ -154,6 +169,32 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+   
+   Conexion con = new Conexion();
+   AlumnoData a1 = new AlumnoData(con);
+   Alumno al1= new Alumno();
+   al1.setDni(Integer.parseInt(jTDocumento.getText()));
+   al1.setApellido(jTApellido.getText());
+   al1.setNombre(jTNombre.getText());
+   if(jRadioButton1.isFocusOwner()){
+       al1.setEstado(true);
+   }
+   
+   
+   
+        
+        
+    }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+      
+      if(jRadioButton1.doClick()){
+          
+      }
+    
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardar;
@@ -173,4 +214,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTDocumento;
     private javax.swing.JTextField jTNombre;
     // End of variables declaration//GEN-END:variables
+
+
+
 }

@@ -23,7 +23,7 @@ public class Conexion {
     
     private static Connection connection;  // lo que importa  
 
-    private Conexion(){}
+    public Conexion(){}
     
       
     public static Connection getConexion(){
