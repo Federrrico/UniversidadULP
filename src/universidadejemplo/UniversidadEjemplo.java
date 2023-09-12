@@ -21,13 +21,20 @@ public class UniversidadEjemplo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Conexion.getConexion();
+
+        AlumnoData pruebaData = new AlumnoData();
 //        Alumno prueba = new Alumno(34155039, "Acenjo", "Federico", LocalDate.of(1988, Month.OCTOBER, 30), true);
+//        pruebaData.guardarAlumno(prueba);
+//        System.out.println(prueba.getIdAlumno());
+        System.out.println(pruebaData.buscarAlumno(11));
+//        MateriaData mpruebaData = new MateriaData();
 //        Materia mprueba = new Materia("Matematicas", 2005, true);
-//        Inscripcion iprueba = new Inscripcion(prueba, mprueba, 8.5);
-//        
+//        mpruebaData.guardarMateria(mprueba);
 //        InscripcionData idprueba = new InscripcionData();
-//        
+//        Inscripcion iprueba = new Inscripcion(prueba, mprueba, 8.5);
+        
+
+        
 //        idprueba.guardarInscripcion(iprueba);
         
         
