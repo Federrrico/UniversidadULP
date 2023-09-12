@@ -24,8 +24,8 @@ public class AlumnoData {
     private Connection con = null;
      
     
-    public AlumnoData(Conexion con) {
-        this.con = Conexion.getConexion();
+    public AlumnoData() {
+       con=Conexion.getConexion();
     }
     
     public void guardarAlumno(Alumno alumno) {

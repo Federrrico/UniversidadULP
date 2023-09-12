@@ -5,6 +5,10 @@
  */
 package universidadejemplo.Vistas;
 import java.sql.Connection;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Formatter;
+import javax.swing.JOptionPane;
 import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.AccesoADatos.Conexion;
 import universidadejemplo.Entidades.Alumno;
@@ -60,12 +64,6 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         jLabel4.setText("Nombre:");
 
         jLabel5.setText("Estado:");
-
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel6.setText("Fecha de nacimiento:");
 
@@ -171,29 +169,28 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
    
-   Conexion con = new Conexion();
-   AlumnoData a1 = new AlumnoData(con);
+   Conexion.getConexion();
+   AlumnoData a1 = new AlumnoData();
    Alumno al1= new Alumno();
+        if (!jTDocumento.getText().isEmpty()&&!jTApellido.getText().isEmpty()
+                &&!jTNombre.getText().isEmpty()    ) {
+            
+            
+        
    al1.setDni(Integer.parseInt(jTDocumento.getText()));
    al1.setApellido(jTApellido.getText());
    al1.setNombre(jTNombre.getText());
-   if(jRadioButton1.isFocusOwner()){
+   if(jRadioButton1.isSelected()){
        al1.setEstado(true);
+   }else{
+       JOptionPane.showMessageDialog(this,"Tene!! que selecionar!!!!");
    }
-   
-   
-   
+
+    al1.setFechaNacimiento( Date.valueOf(jDateChooser1.toString()).toLocalDate());
+        }
         
         
     }//GEN-LAST:event_jBGuardarActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-      
-      if(jRadioButton1.doClick()){
-          
-      }
-    
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
