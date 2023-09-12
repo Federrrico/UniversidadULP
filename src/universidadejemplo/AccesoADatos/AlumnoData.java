@@ -22,10 +22,10 @@ import javax.swing.JOptionPane;
 public class AlumnoData {
     
     private Connection con = null;
+     
     
-    
-    public AlumnoData() {
-        con = Conexion.getConexion();
+    public AlumnoData(Conexion con) {
+        this.con = Conexion.getConexion();
     }
     
     public void guardarAlumno(Alumno alumno) {
