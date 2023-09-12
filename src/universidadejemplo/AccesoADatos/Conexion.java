@@ -16,14 +16,14 @@ import java.util.logging.Logger;
  * @author federico.acenjo
  */
 public class Conexion {
-    private static final String URL = "jdbc:mariadb://localhost/";
+    private static final String URL = "jdbc:mariadb://localhost:3306/";
     private static final String DB = "universidadulp";
     private static final String USUARIO = "root";    // root
     private static final String PASSWORD = "";   // ""
     
     private static Connection connection;  // lo que importa  
 
-    public Conexion(){}
+    private Conexion(){}
     
       
     public static Connection getConexion(){

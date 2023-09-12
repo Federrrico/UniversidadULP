@@ -98,6 +98,7 @@ public class Alumno {
 
     @Override
     public String toString() {
+        edad(getFechaNacimiento());
         return "Alumno, " + "DNI: " + dni + ", Apellido: " + apellido + ", Nombre: " + nombre + ", Edad: " + edad;
     }
 
