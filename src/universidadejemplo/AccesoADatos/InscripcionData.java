@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import universidadejemplo.Entidades.*;
 /**
@@ -25,6 +27,8 @@ public class InscripcionData {
 
     public InscripcionData() {
         con = Conexion.getConexion();
+        materiaData = new MateriaData();
+        alumnoData = new AlumnoData();
     }
     
     public void guardarInscripcion(Inscripcion inscripcion) {
@@ -95,7 +99,7 @@ public class InscripcionData {
         }
     }
     
-    public List<Inscripcion> listarInscripcions() {
+    public List<Inscripcion> listarInscripciones() {
         List<Inscripcion> inscripcions = new ArrayList<>();
         
         try {
@@ -117,5 +121,44 @@ public class InscripcionData {
         }
         return inscripcions;
     }
+    
+    public List<Materia> obtenerMateriasCursadas(int id) {
+        List<Materia> materias = new ArrayList<>();
+        
+        try {
+            String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion,"
+                    + " materia WHERE inscripcion.idMateria = materia.idMateria AND "
+                    + "inscripcion.idAlumno = ? AND materia.estado = 1";
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Materia materia;
+            while(rs.next()){
+                materia = new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAño(rs.getInt("año"));
+                materia.setEstado(true);
+                materias.add(materia);
+            } 
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripcion "+ex.getMessage());
+        }
+        return materias;
+    }
+    
+    public List<Materia> obtenerMateriasNoCursadas(int id) {
+        List<Materia> materiasC = new ArrayList<>(obtenerMateriasCursadas(id));
+        List<Materia> materias = new ArrayList<>(materiaData.listarMaterias());
+       
+        materias.removeAll(materiasC);
+               
+        return materias;
+    }
+    
+     
+       
     
 }
