@@ -169,27 +169,24 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
    
-   Conexion.getConexion();
-   AlumnoData a1 = new AlumnoData();
-   Alumno al1= new Alumno();
-        if (!jTDocumento.getText().isEmpty()&&!jTApellido.getText().isEmpty()
-                &&!jTNombre.getText().isEmpty()    ) {
-            
-            
-        
-   al1.setDni(Integer.parseInt(jTDocumento.getText()));
-   al1.setApellido(jTApellido.getText());
-   al1.setNombre(jTNombre.getText());
-   if(jRadioButton1.isSelected()){
-       al1.setEstado(true);
-   }else{
-       JOptionPane.showMessageDialog(this,"Tene!! que selecionar!!!!");
-   }
-
-    al1.setFechaNacimiento( Date.valueOf(jDateChooser1.toString()).toLocalDate());
+        Conexion.getConexion();
+        AlumnoData a1 = new AlumnoData();
+        Alumno al1 = new Alumno();
+        if (!jTDocumento.getText().isEmpty() && !jTApellido.getText().isEmpty()
+                && !jTNombre.getText().isEmpty()) {
+            al1.setDni(Integer.parseInt(jTDocumento.getText()));
+            al1.setApellido(jTApellido.getText());
+            al1.setNombre(jTNombre.getText());
+            if (jRadioButton1.isSelected()) {
+                al1.setEstado(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Tene!! que selecionar!!!!");
+            }
+            al1.setFechaNacimiento(Date.valueOf(jDateChooser1.toString()).toLocalDate());
+            a1.guardarAlumno(al1);
         }
         
-        
+
     }//GEN-LAST:event_jBGuardarActionPerformed
 
 

@@ -32,14 +32,15 @@ public class InscripcionData {
         String sql = "INSERT INTO inscripcion (nota, idAlumno, idMateria) VALUES (?, ?, ?)";
         
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setDouble(1, inscripcion.getNota());
             ps.setInt(2, inscripcion.getIdAlumno().getIdAlumno());
             ps.setInt(3, inscripcion.getIdMateria().getIdMateria());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                inscripcion.setIdInscripcion(rs.getInt("idInscripcion"));
+                inscripcion.setIdInscripcion(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Inscripcion añadida con exito.");
             }
             ps.close();            
@@ -48,5 +49,73 @@ public class InscripcionData {
         }
     }
     
+    public Inscripcion buscarInscripcion(int id) {
+        Inscripcion inscripcion = null;
+        String sql = "SELECT * FROM inscripcion WHERE idInscripto = ? AND estado = 1";
+//        PreparedStatement ps = null;
+        try {
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,id );
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                inscripcion=new Inscripcion();
+                inscripcion.setIdInscripcion(id);
+                inscripcion.setIdAlumno(alumnoData.buscarAlumno(rs.getInt(3)));
+                inscripcion.setIdMateria(materiaData.buscarMateria(rs.getInt(4)));
+                inscripcion.setNota(rs.getDouble(2));
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el inscripcion");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripcion "+ex.getMessage());
+        }
+        return inscripcion;
+    }
+    
+    public void modificarInscripcion(Inscripcion inscripcion) {
+        String sql = "UPDATE inscripcion SET nota = ?, idAlumno= ?, idMAteria= ? WHERE idInscripto = ?;";
+//        PreparedStatement ps = null;
+        try {
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql);
+            ps.setDouble(1, inscripcion.getNota());
+            ps.setInt(2, inscripcion.getIdAlumno().getIdAlumno());
+            ps.setInt(3, inscripcion.getIdMateria().getIdMateria());
+            int exito = ps.executeUpdate();    
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Modificada Exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "La inscripcion no existe");
+            }
+            ps.close();            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripcion "+ex.getMessage());
+        }
+    }
+    
+    public List<Inscripcion> listarInscripcions() {
+        List<Inscripcion> inscripcions = new ArrayList<>();
+        
+        try {
+            String sql = "SELECT * FROM inscripcion WHERE estado = 1";
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Inscripcion inscripcion = new Inscripcion();
+                inscripcion.setIdInscripcion(rs.getInt(1));
+                inscripcion.setIdAlumno(alumnoData.buscarAlumno(rs.getInt(3)));
+                inscripcion.setIdMateria(materiaData.buscarMateria(rs.getInt(4)));
+                inscripcion.setNota(rs.getDouble(2));
+                inscripcions.add(inscripcion);
+            } 
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripcion "+ex.getMessage());
+        }
+        return inscripcions;
+    }
     
 }
