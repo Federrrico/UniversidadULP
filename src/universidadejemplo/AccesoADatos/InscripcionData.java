@@ -78,17 +78,17 @@ public class InscripcionData {
         return inscripcion;
     }
     
-    public void modificarInscripcion(Inscripcion inscripcion) {
-        String sql = "UPDATE inscripcion SET nota = ?, idAlumno= ?, idMAteria= ? WHERE idInscripto = ?;";
+    public void actualizarNota(int idAlumno, int idMateria, Double nota) {
+        String sql = "UPDATE inscripcion SET nota = ?  WHERE idAlumno= ?, idMAteria= ?;";
 //        PreparedStatement ps = null;
         try {
             PreparedStatement ps;
             ps = con.prepareStatement(sql);
-            ps.setDouble(1, inscripcion.getNota());
-            ps.setInt(2, inscripcion.getIdAlumno().getIdAlumno());
-            ps.setInt(3, inscripcion.getIdMateria().getIdMateria());
+            ps.setDouble(1, nota);
+            ps.setInt(2, idAlumno);
+            ps.setInt(3, idMateria);
             int exito = ps.executeUpdate();    
-            if (exito == 1) {
+            if (exito > 0) {
                 JOptionPane.showMessageDialog(null, "Modificada Exitosamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "La inscripcion no existe");
