@@ -79,7 +79,7 @@ public class InscripcionData {
     }
     
     public void actualizarNota(int idAlumno, int idMateria, Double nota) {
-        String sql = "UPDATE inscripcion SET nota = ?  WHERE idAlumno= ?, idMAteria= ?;";
+        String sql = "UPDATE inscripcion SET nota = ?  WHERE idAlumno= ?, idMateria= ?;";
 //        PreparedStatement ps = null;
         try {
             PreparedStatement ps;
@@ -159,7 +159,7 @@ public class InscripcionData {
     }
     
     public void borrarInscripcion(int idAlumno, int idMateria){
-        String sql = "DELETE FROM inscripcion WHERE idAlumno= ?, idMAteria= ?;";
+        String sql = "DELETE FROM inscripcion WHERE idAlumno= ?, idMateria= ?;";
 
         try {
             PreparedStatement ps;
@@ -179,5 +179,32 @@ public class InscripcionData {
         
     }
        
-    
+    public List<Alumno> listarAlumnosPorMateria(int idMateria){
+        List<Alumno> alumnosPorMateria = new ArrayList<>();
+        
+        try {
+            String sql = "SELECT i.idAlumno, dni, apellido, nombre, fechaNacimiento, estado FROM Inscripcion i,"
+                    + " Alumno a WHERE i.idAlumno = a.idAlumno AND "
+                    + "i.idMateria = ? AND a.estado = 1";
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idMateria);
+            ResultSet rs = ps.executeQuery();
+            Alumno alumno;
+            while(rs.next()){
+                alumno = new Alumno();
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(true);
+                alumnosPorMateria.add(alumno);
+            } 
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripcion o Alumno "+ex.getMessage());
+        }
+        return alumnosPorMateria;
+    }
 }
