@@ -22,22 +22,25 @@ public class UniversidadEjemplo {
      */
     public static void main(String[] args) {
 
-        AlumnoData pruebaData = new AlumnoData();
-        Alumno prueba = new Alumno(34155039, "Acenjo", "Federico", LocalDate.of(1988, Month.OCTOBER, 30), true);
-        pruebaData.guardarAlumno(prueba);
-        System.out.println("Se guarda alumno en DB");
-        MateriaData mpruebaData = new MateriaData();
-        Materia mprueba = new Materia("Matematicas", 2005, true);
-        mpruebaData.guardarMateria(mprueba);
-        System.out.println("Se guarda materia en DB");
+//        AlumnoData pruebaData = new AlumnoData();
+//        Alumno prueba = new Alumno(34155039, "Acenjo", "Federico", LocalDate.of(1988, Month.OCTOBER, 30), true);
+//        pruebaData.guardarAlumno(prueba);
+//        System.out.println("Se guarda alumno en DB");
+//        MateriaData mpruebaData = new MateriaData();
+//        Materia mprueba = new Materia("Matematicas", 2005, true);
+//        mpruebaData.guardarMateria(mprueba);
+//        System.out.println("Se guarda materia en DB");
         InscripcionData idprueba = new InscripcionData();
-        Inscripcion iprueba = new Inscripcion(prueba, mprueba, 8.5);       
-        idprueba.guardarInscripcion(iprueba);
-        System.out.println("Se guarda inscripcion en DB");
+//        Inscripcion iprueba = new Inscripcion(prueba, mprueba, 8.5);       
+//        idprueba.guardarInscripcion(iprueba);
+//        System.out.println("Se guarda inscripcion en DB");
+//        
+//        System.out.println(idprueba.buscarInscripcion(iprueba.getIdInscripcion()));
         
-        System.out.println(idprueba.toString());
-        
-        
+        System.out.println("Mostramos las inscripciones:");
+        for (Inscripcion ins : idprueba.listarInscripciones()) {
+            System.out.println(ins.toString());
+        }
         
         
     }

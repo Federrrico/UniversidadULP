@@ -103,7 +103,7 @@ public class InscripcionData {
         List<Inscripcion> inscripcions = new ArrayList<>();
         
         try {
-            String sql = "SELECT * FROM inscripcion WHERE estado = 1";
+            String sql = "SELECT * FROM inscripcion";
             PreparedStatement ps;
             ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

@@ -14,7 +14,6 @@ public class Materia {
     private String nombre;
     private int año;
     private boolean estado;
-    private String estadoString;
 
     public Materia() {
     }
@@ -23,7 +22,6 @@ public class Materia {
         this.nombre = nombre;
         this.año = año;
         this.estado = estado;
-        estadoToString(estado);
     }
 
     public Materia(int idMateria, String nombre, int año, boolean estado) {
@@ -64,17 +62,9 @@ public class Materia {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
-    public void estadoToString(boolean estado){
-        if (estado){
-            estadoString = "activa";
-        } else {
-            estadoString = "inactiva";
-        }
-    }
 
     @Override
     public String toString() {
-        return "Materia N°: " + idMateria + ", Nombre: " + nombre + ", A\u00f1o: " + año + ", Estado: " + estadoString;
+        return "Materia N°: " + idMateria + ", Nombre: " + nombre + ", A\u00f1o: " + año;
     }
 }
