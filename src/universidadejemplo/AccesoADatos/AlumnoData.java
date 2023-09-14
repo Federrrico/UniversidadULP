@@ -147,6 +147,27 @@ public class AlumnoData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
         }
     }
+     
+    public void eliminarAlumnoporDni(int dni) {
+        String sql = "UPDATE alumno SET estado= 0 WHERE dni = ?;";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ps.executeUpdate();
+            int exito = ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();            
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Eliminado Exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El alumno no existe");
+            }
+            ps.close();           
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
+        }
+    }
     
     public List<Alumno> listarAlumnos() {
         List<Alumno> alumnos = new ArrayList<>();

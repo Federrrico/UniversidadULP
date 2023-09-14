@@ -97,8 +97,18 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         jBuscar.setText("Buscar");
 
         jBNuevo.setText("Nuevo");
+        jBNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNuevoActionPerformed(evt);
+            }
+        });
 
         jElimiinar.setText("Eliminar");
+        jElimiinar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jElimiinarActionPerformed(evt);
+            }
+        });
 
         jBGuardar.setText("Guardar");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +118,11 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         });
 
         jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,6 +234,32 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
+     jTDocumento.setText("");
+     jTApellido.setText("");
+     jTNombre.setText("");
+     jRadioButton1.setSelected(false);
+     jDateChooser1.setCalendar(null);
+  
+  
+  
+    }//GEN-LAST:event_jBNuevoActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jElimiinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jElimiinarActionPerformed
+       Conexion.getConexion();
+       AlumnoData a1 = new AlumnoData();
+       Alumno al1 = new Alumno();
+       int dni=Integer.parseInt(jTDocumento.getText());
+        if (dni == (a1.buscarAlumnoPorDni(dni).getDni())) {
+            a1.eliminarAlumnoporDni(dni);
+        }
+       
+    }//GEN-LAST:event_jElimiinarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
