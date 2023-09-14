@@ -79,7 +79,7 @@ public class InscripcionData {
     }
     
     public void actualizarNota(int idAlumno, int idMateria, Double nota) {
-        String sql = "UPDATE inscripcion SET nota = ?  WHERE idAlumno= ?, idMateria= ?;";
+        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno=? AND idMateria=?";
 //        PreparedStatement ps = null;
         try {
             PreparedStatement ps;
@@ -159,7 +159,7 @@ public class InscripcionData {
     }
     
     public void borrarInscripcion(int idAlumno, int idMateria){
-        String sql = "DELETE FROM inscripcion WHERE idAlumno= ?, idMateria= ?;";
+        String sql = "DELETE FROM inscripcion WHERE idAlumno=? AND idMateria=?;";
 
         try {
             PreparedStatement ps;
