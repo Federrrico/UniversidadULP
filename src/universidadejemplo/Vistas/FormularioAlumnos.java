@@ -4,9 +4,15 @@
  * and open the template in the editor.
  */
 package universidadejemplo.Vistas;
+
+import com.toedter.calendar.JDateChooser;
 import java.sql.Connection;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Formatter;
 import javax.swing.JOptionPane;
 import universidadejemplo.AccesoADatos.AlumnoData;
@@ -25,7 +31,28 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     public FormularioAlumnos() {
         initComponents();
     }
+    SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 
+    public String getFecha(JDateChooser jd) {//recibe jdate retorna string
+        if (jd.getDate() != null) {
+            return formato.format(jd.getDate());
+        } else {
+            return null;
+        }
+
+    }
+
+//public Date a(String fecha){ //recibe string retorna Date
+//SimpleDateFormat fText= new SimpleDateFormat("dd-MM-yyyy");
+//    System.out.println(fecha);
+//try{
+//    java.util.Date fechaE= fText.parse(fecha);
+//return (Date) fechaE;
+//}catch(ParseException ex){
+//return null;
+//}
+//
+//}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,25 +195,29 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-   
+
         Conexion.getConexion();
         AlumnoData a1 = new AlumnoData();
         Alumno al1 = new Alumno();
+        String fecha = getFecha(jDateChooser1);
+        try{
         if (!jTDocumento.getText().isEmpty() && !jTApellido.getText().isEmpty()
-                && !jTNombre.getText().isEmpty()) {
+                && !jTNombre.getText().isEmpty()&& jDateChooser1.isEnabled()&&jRadioButton1.isSelected()) {
             al1.setDni(Integer.parseInt(jTDocumento.getText()));
             al1.setApellido(jTApellido.getText());
             al1.setNombre(jTNombre.getText());
-            if (jRadioButton1.isSelected()) {
-                al1.setEstado(true);
-            } else {
-                JOptionPane.showMessageDialog(this, "Tene!! que selecionar!!!!");
-            }
-            al1.setFechaNacimiento(Date.valueOf(jDateChooser1.toString()).toLocalDate());
+            al1.setEstado(true);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            al1.setFechaNacimiento(LocalDate.parse(fecha, dtf));
             a1.guardarAlumno(al1);
+        }else{
+            JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
+        }}catch(NullPointerException e){
+            JOptionPane.showMessageDialog(this,"La fecha no ha sido Ingresada!!");
+        }catch(NumberFormatException ex){
+             JOptionPane.showMessageDialog(this,"Solo tenes que ingresar numeros");
         }
         
-
     }//GEN-LAST:event_jBGuardarActionPerformed
 
 
@@ -208,7 +239,5 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTDocumento;
     private javax.swing.JTextField jTNombre;
     // End of variables declaration//GEN-END:variables
-
-
 
 }
