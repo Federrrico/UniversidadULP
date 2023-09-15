@@ -82,6 +82,11 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         });
 
         jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -202,6 +207,25 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debes ingresar NUMEROS");
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        MateriaData a1 = new MateriaData();
+        Materia al1 = new Materia();
+        try{
+        if (!jTCodigo.getText().isEmpty() && !jTNombre.getText().isEmpty()&&jRBEstado.isSelected()
+                && !jTAño.getText().isEmpty()) {
+            al1.setIdMateria(Integer.parseInt(jTCodigo.getText()));
+            al1.setNombre(jTNombre.getText());
+            al1.setAño(Integer.parseInt(jTAño.getText()));
+            al1.setEstado(true);
+            a1.guardarMateria(al1);
+            }else{
+            JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
+        }
+        }catch(NumberFormatException ex){
+             JOptionPane.showMessageDialog(this,"Solo tenes que ingresar numeros");
+        }
+    }//GEN-LAST:event_jBGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
