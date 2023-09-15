@@ -75,6 +75,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMMateria.setText("Materia");
 
         jMIFormMateria.setText("Formulario de Materias");
+        jMIFormMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIFormMateriaActionPerformed(evt);
+            }
+        });
         jMMateria.add(jMIFormMateria);
 
         jMenuBar1.add(jMMateria);
@@ -123,6 +128,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jEscritorio.add(fA);
         jEscritorio.moveToFront(fA);
     }//GEN-LAST:event_jMIFormularioAlumnosActionPerformed
+
+    private void jMIFormMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormMateriaActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        FormularioMateria fA = new FormularioMateria();
+        fA.setVisible(true);
+        jEscritorio.add(fA);
+        jEscritorio.moveToFront(fA);
+    }//GEN-LAST:event_jMIFormMateriaActionPerformed
 
     /**
      * @param args the command line arguments

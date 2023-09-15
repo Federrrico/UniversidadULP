@@ -135,7 +135,7 @@ public class AlumnoData {
             ps.setInt(1, id);
             ps.executeUpdate();
             int exito = ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();            
+//            ResultSet rs = ps.getGeneratedKeys();            
 
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Eliminado Exitosamente.");
@@ -156,16 +156,16 @@ public class AlumnoData {
             ps.setInt(1, dni);
             ps.executeUpdate();
             int exito = ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();            
 
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Eliminado Exitosamente.");
+                ps.close();
             } else {
                 JOptionPane.showMessageDialog(null, "El alumno no existe");
             }
-            ps.close();           
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno " + ex.getMessage());
         }
     }
     

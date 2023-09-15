@@ -93,14 +93,13 @@ public class MateriaData {
     }
     
     public void eliminarMateria(int id) {
-        String sql = "UPDATE materia SET estado= 0 WHERE idMateria = ?;";
+        String sql = "UPDATE materia SET estado= 0 WHERE idMateria = ? ;";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
-            int exito = ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();            
+            int exito = ps.executeUpdate();            
 
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Eliminada Exitosamente.");
