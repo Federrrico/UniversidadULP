@@ -267,14 +267,16 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         AlumnoData a1 = new AlumnoData();
         int dni=Integer.parseInt(jTDocumento.getText());
         Alumno alu = new Alumno();
-        alu = a1.buscarAlumnoPorDni(dni);
-        jTApellido.setText(alu.getApellido());
-        jTNombre.setText(alu.getNombre());
-        jTDocumento.setText(alu.getDni() + "");
-//        jRadioButton1.setEnabled(true);
-        jRadioButton1.setSelected(true);
-        jDateChooser1.setDate(Date.valueOf(alu.getFechaNacimiento()));
-        
+        try {
+            alu = a1.buscarAlumnoPorDni(dni);
+            jTApellido.setText(alu.getApellido());
+            jTNombre.setText(alu.getNombre());
+            jTDocumento.setText(alu.getDni() + "");
+            jRadioButton1.setSelected(true);
+            jDateChooser1.setDate(Date.valueOf(alu.getFechaNacimiento()));
+        }  catch (NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "No existe el alumno");
+        }        
     }//GEN-LAST:event_jBuscarActionPerformed
 
 

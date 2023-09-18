@@ -176,18 +176,28 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-        MateriaData mt = new MateriaData();
-        try {
-            int cod = Integer.parseInt(jTCodigo.getText());
-            mt.buscarMateria(cod);
-            Materia mat = new Materia();
-            mat = mt.buscarMateria(cod);
-            jTAño.setText(mat.getAño() + "");
-            jTNombre.setText(mat.getNombre());
-            jRBEstado.setSelected(true);
-        } catch (NumberFormatException ex){
-            JOptionPane.showMessageDialog(this, "Debes ingresar NUMEROS");
+        if (jTCodigo.isEnabled()) {
+            MateriaData mt = new MateriaData();
+            try {
+                int cod = Integer.parseInt(jTCodigo.getText());
+                Materia mat = mt.buscarMateria(cod);
+                jTAño.setText(mat.getAño() + "");
+                jTNombre.setText(mat.getNombre());
+                jRBEstado.setSelected(true);
+                
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Debes ingresar NUMEROS");
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(null, "No existe la materia");
+            }
+        } else {
+            jTCodigo.setEnabled(true);
+            jTAño.setText("");
+            jTNombre.setText("");
+            jRBEstado.setSelected(false);
         }
+        
+        
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
@@ -195,6 +205,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         jTNombre.setText("");
         jRBEstado.setSelected(false);
         jTCodigo.setText("");
+        jTCodigo.setEnabled(false);
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
@@ -211,15 +222,14 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         MateriaData a1 = new MateriaData();
         Materia al1 = new Materia();
-        try{
-        if (!jTCodigo.getText().isEmpty() && !jTNombre.getText().isEmpty()&&jRBEstado.isSelected()
-                && !jTAño.getText().isEmpty()) {
-            al1.setIdMateria(Integer.parseInt(jTCodigo.getText()));
-            al1.setNombre(jTNombre.getText());
-            al1.setAño(Integer.parseInt(jTAño.getText()));
-            al1.setEstado(true);
-            a1.guardarMateria(al1);
-            }else{
+        try {
+            if (!jTNombre.getText().isEmpty() && jRBEstado.isSelected()
+                    && !jTAño.getText().isEmpty()) {
+                al1.setNombre(jTNombre.getText());
+                al1.setAño(Integer.parseInt(jTAño.getText()));
+                al1.setEstado(true);
+                a1.guardarMateria(al1);
+            } else {
             JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
         }
         }catch(NumberFormatException ex){
