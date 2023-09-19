@@ -59,6 +59,11 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione un alumno:");
 
+        jCBAlumnos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBAlumnosItemStateChanged(evt);
+            }
+        });
         jCBAlumnos.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -149,6 +154,15 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         
 
     }//GEN-LAST:event_jCBAlumnosPopupMenuWillBecomeVisible
+
+    private void jCBAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBAlumnosItemStateChanged
+        borrarFilas();
+            Alumno al1 = (Alumno) jCBAlumnos.getSelectedItem();
+            InscripcionData ida = new InscripcionData();
+            for (Materia materia : ida.obtenerMateriasCursadas(al1.getIdAlumno())) {
+                modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
+            }
+    }//GEN-LAST:event_jCBAlumnosItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
