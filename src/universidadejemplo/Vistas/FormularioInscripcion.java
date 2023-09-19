@@ -186,11 +186,25 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void jRBMateriaNoInscriptaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBMateriaNoInscriptaActionPerformed
         jRBMateriasInscriptas.setSelected(false);
+        borrarFilas();    
+        jBInscribir.setEnabled(true);
+        jBAnularInscripcion.setEnabled(false);
+       
+        jRBMateriaNoInscripta.setSelected(false);
+        InscripcionData ida = new InscripcionData();
+        Alumno al1 = (Alumno) jCBAlumno.getSelectedItem();      
+        
+        String lo = jCBAlumno.getSelectedItem().toString();
+ 
+        for (Materia materia : ida.obtenerMateriasNoCursadas(al1.getIdAlumno())) {
+            modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
+        }
     }//GEN-LAST:event_jRBMateriaNoInscriptaActionPerformed
 
     private void jRBMateriasInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRBMateriasInscriptasMouseClicked
         borrarFilas();    
-        
+        jBInscribir.setEnabled(false);
+        jBAnularInscripcion.setEnabled(true);
         jRBMateriaNoInscripta.setSelected(false);
         InscripcionData ida = new InscripcionData();
         Alumno al1 = (Alumno) jCBAlumno.getSelectedItem();      
