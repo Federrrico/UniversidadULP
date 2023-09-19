@@ -78,14 +78,14 @@ public class UniversidadEjemplo {
 //        
 //        System.out.println("Obtenemos las materias cursadas de un alumno");
 //        
-//        for (Materia ins : idprueba.obtenerMateriasCursadas(25)) {
-//            System.out.println(ins.toString());
-//        }
+        for (Materia ins : idprueba.obtenerMateriasCursadas(20)) {
+            System.out.println(ins.toString());
+        }
 //        
-//        System.out.println("Obtenemos las materias no cursadas de un alumno");
-//        for (Materia ins : idprueba.obtenerMateriasCursadas(20)) {
-//            System.out.println(ins.toString());
-//        }
+        System.out.println("Obtenemos las materias no cursadas de un alumno");
+        for (Materia ins : idprueba.obtenerMateriasNoCursadas(20)) {
+            System.out.println(ins.toString());
+        }
 //        
 //        System.out.println("Borramos una inscripcion");
 //        idprueba.borrarInscripcion(25, 6);
@@ -95,7 +95,7 @@ public class UniversidadEjemplo {
 //            System.out.println(ins.toString());
 //        }
         
-    
+
         
         
     }

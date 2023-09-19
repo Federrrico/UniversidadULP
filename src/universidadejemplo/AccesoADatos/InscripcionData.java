@@ -150,11 +150,28 @@ public class InscripcionData {
     }
     
     public List<Materia> obtenerMateriasNoCursadas(int id) {
-        List<Materia> materiasC = new ArrayList<>(obtenerMateriasCursadas(id));
-        List<Materia> materias = new ArrayList<>(materiaData.listarMaterias());
-       
-        materias.removeAll(materiasC);
-               
+        List<Materia> materias = new ArrayList<>();
+        
+        try {
+            String sql = "SELECT * FROM materia WHERE estado = 1"
+                    + " AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Materia materia;
+            while(rs.next()){
+                materia = new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAño(rs.getInt("año"));
+                materia.setEstado(true);
+                materias.add(materia);
+            } 
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripcion "+ex.getMessage());
+        }
         return materias;
     }
     

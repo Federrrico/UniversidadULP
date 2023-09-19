@@ -95,6 +95,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMAdministracion.add(jMIManejo);
 
         jMIManipulacion.setText("Manipulacion de Notas");
+        jMIManipulacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIManipulacionActionPerformed(evt);
+            }
+        });
         jMAdministracion.add(jMIManipulacion);
 
         jMenuBar1.add(jMAdministracion);
@@ -151,6 +156,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jEscritorio.add(fA);
         jEscritorio.moveToFront(fA);
     }//GEN-LAST:event_jMIManejoActionPerformed
+
+    private void jMIManipulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIManipulacionActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        CargaDeNotas fA = new CargaDeNotas();
+        fA.setVisible(true);
+        jEscritorio.add(fA);
+        jEscritorio.moveToFront(fA);
+    }//GEN-LAST:event_jMIManipulacionActionPerformed
 
     /**
      * @param args the command line arguments

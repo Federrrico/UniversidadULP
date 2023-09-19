@@ -5,17 +5,34 @@
  */
 package universidadejemplo.Vistas;
 
+import javax.swing.table.DefaultTableModel;
+import universidadejemplo.AccesoADatos.AlumnoData;
+import universidadejemplo.AccesoADatos.InscripcionData;
+import universidadejemplo.Entidades.Alumno;
+import universidadejemplo.Entidades.Materia;
+
 /**
  *
  * @author Editor
  */
 public class CargaDeNotas extends javax.swing.JInternalFrame {
-
+    private DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form CargaDeNotas
      */
     public CargaDeNotas() {
         initComponents();
+        modelo.addColumn("ID");
+        modelo.addColumn("NOMBRE");
+        modelo.addColumn("NOTA");
+        jTMaterias.setModel(modelo);
+    }
+    
+    private void borrarFilas(){
+        int f = modelo.getRowCount() - 1;
+        for (;f >= 0; f--) {
+            modelo.removeRow(f);
+        }
     }
 
     /**
@@ -29,9 +46,9 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBAlumnos = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTMaterias = new javax.swing.JTable();
         jBGuardar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
 
@@ -42,9 +59,17 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione un alumno:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBAlumnos.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                jCBAlumnosPopupMenuWillBecomeVisible(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -55,7 +80,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTMaterias);
 
         jBGuardar.setText("Guardar");
 
@@ -81,7 +106,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                             .addGap(26, 26, 26)
                             .addComponent(jLabel2)
                             .addGap(52, 52, 52)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jCBAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(143, 143, 143)
                         .addComponent(jLabel1)))
@@ -95,7 +120,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
@@ -108,14 +133,31 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCBAlumnosPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBAlumnosPopupMenuWillBecomeVisible
+        AlumnoData a1 = new AlumnoData();
+        Alumno al1 = new Alumno();
+        
+        
+        jCBAlumnos.removeAllItems();
+        
+        for (Alumno alumno : a1.listarAlumnos()) {
+            jCBAlumnos.addItem(alumno);
+        }
+        
+        
+            
+        
+
+    }//GEN-LAST:event_jCBAlumnosPopupMenuWillBecomeVisible
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Alumno> jCBAlumnos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTMaterias;
     // End of variables declaration//GEN-END:variables
 }
