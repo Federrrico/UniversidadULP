@@ -5,10 +5,15 @@
  */
 package universidadejemplo.Vistas;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.AccesoADatos.InscripcionData;
+import universidadejemplo.AccesoADatos.MateriaData;
 import universidadejemplo.Entidades.Alumno;
+import universidadejemplo.Entidades.Inscripcion;
 import universidadejemplo.Entidades.Materia;
 
 /**
@@ -16,7 +21,13 @@ import universidadejemplo.Entidades.Materia;
  * @author Editor
  */
 public class CargaDeNotas extends javax.swing.JInternalFrame {
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int rowIndex, int columnIndex){
+            return columnIndex == 2;
+        }
+    };
+   
     /**
      * Creates new form CargaDeNotas
      */
@@ -76,20 +87,30 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
 
         jTMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jTMaterias);
 
         jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,27 +163,58 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         AlumnoData a1 = new AlumnoData();
         Alumno al1 = new Alumno();
         
-        
         jCBAlumnos.removeAllItems();
+        
+        jCBAlumnos.addItem(null);
         
         for (Alumno alumno : a1.listarAlumnos()) {
             jCBAlumnos.addItem(alumno);
         }
-        
-        
-            
-        
-
     }//GEN-LAST:event_jCBAlumnosPopupMenuWillBecomeVisible
 
     private void jCBAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBAlumnosItemStateChanged
         borrarFilas();
-            Alumno al1 = (Alumno) jCBAlumnos.getSelectedItem();
-            InscripcionData ida = new InscripcionData();
-            for (Materia materia : ida.obtenerMateriasCursadas(al1.getIdAlumno())) {
-                modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
+        modelo.isCellEditable(jTMaterias.getSelectedRow(), 2);
+        
+        int i = 0;
+        Alumno al1 = (Alumno) jCBAlumnos.getSelectedItem();
+        
+        InscripcionData ida = new InscripcionData();
+        
+        try {
+            List<Inscripcion> inscripciones = new ArrayList<>(ida.listarInscripciones());
+            List<Materia> materias = new ArrayList<>(ida.obtenerMateriasCursadas(al1.getIdAlumno()));
+            for (Inscripcion inscripcion : inscripciones) {
+                if (inscripcion.getIdAlumno().getIdAlumno() == al1.getIdAlumno()
+                        && inscripcion.getIdMateria().getIdMateria() == materias.get(i).getIdMateria()) {
+                    modelo.addRow(new Object[]{materias.get(i).getIdMateria(), materias.get(i).getNombre(),
+                        inscripcion.getNota()});
+                    i++;
+                }
             }
+        } catch (NullPointerException ex) {
+            return;
+        }
     }//GEN-LAST:event_jCBAlumnosItemStateChanged
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        InscripcionData insData = new InscripcionData();
+        modelo.isCellEditable(jTMaterias.getSelectedRow(), 0);
+
+        try {
+            int matId = Integer.parseInt(modelo.getValueAt(jTMaterias.getSelectedRow(), 0).toString());
+            Double nota = Double.parseDouble(modelo.getValueAt(jTMaterias.getSelectedRow(), 2).toString());
+            Alumno alu = (Alumno) jCBAlumnos.getSelectedItem();
+            int aluId = alu.getIdAlumno();
+            insData.actualizarNota(aluId, matId, nota);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(this, "Seleccione una opcion para modificar la nota");
+        }
+    }//GEN-LAST:event_jBGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
