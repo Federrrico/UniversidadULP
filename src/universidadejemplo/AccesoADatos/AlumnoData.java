@@ -29,25 +29,48 @@ public class AlumnoData {
     }
     
     public void guardarAlumno(Alumno alumno) {
+        AlumnoData aluD = new AlumnoData();
+        Alumno alu2 = aluD.buscarAlumnoPorDni(alumno.getDni(), 0);
         
         String sql = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
         
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, alumno.getDni());
-            ps.setString(2, alumno.getApellido());
-            ps.setString(3, alumno.getNombre());
-            ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
-            ps.setBoolean(5, true);
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                alumno.setIdAlumno(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Alumno añadido con exito.");
+        if(alu2 == null){
+            try {
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, alumno.getDni());
+                ps.setString(2, alumno.getApellido());
+                ps.setString(3, alumno.getNombre());
+                ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
+                ps.setBoolean(5, true);
+                ps.executeUpdate();
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    alumno.setIdAlumno(rs.getInt(1));
+                    JOptionPane.showMessageDialog(null, "Alumno añadido con exito.");
+                }
+                ps.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Alumno existente");
             }
-            ps.close();            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Alumno existente");
+        } else {
+            int showConfirmDialog = JOptionPane.showConfirmDialog(null, "Este alumno fue dado de baja. Desea habilitarlo?");
+            if (showConfirmDialog == 0) {
+                String sql1 = "UPDATE alumno SET estado= 1 WHERE dni = ?;";
+                PreparedStatement ps = null;
+                try {
+                    ps = con.prepareStatement(sql1);
+                    ps.setInt(1, alu2.getDni());
+                    ps.executeUpdate();
+                    int exito = ps.executeUpdate();
+
+                    if (exito == 1) {
+                        JOptionPane.showMessageDialog(null, "Guardado Exitosamente");
+                        ps.close();
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno");
+                }
+            }
         }
     }
     
@@ -76,9 +99,9 @@ public class AlumnoData {
         return alumno;
     }
     
-    public Alumno buscarAlumnoPorDni(int dni) {
+    public Alumno buscarAlumnoPorDni(int dni, int est) {
         Alumno alumno = null;
-        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ? AND estado = 1";
+        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE dni = ? AND estado = " + est;
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -105,6 +128,7 @@ public class AlumnoData {
         String sql = "UPDATE alumno SET dni= ?, apellido= ?, nombre= ?, fechaNacimiento= ? WHERE idAlumno = ?;";
         PreparedStatement ps = null;
         try {
+            ps = con.prepareStatement(sql);
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
             ps.setString(3, alumno.getNombre());

@@ -5,6 +5,9 @@
  */
 package universidadejemplo.Vistas;
 
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Felipe
@@ -107,11 +110,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMConsultas.setText("Consultas");
 
         jMIAlumnosMa.setText("Alumnos por Materia");
+        jMIAlumnosMa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIAlumnosMaActionPerformed(evt);
+            }
+        });
         jMConsultas.add(jMIAlumnosMa);
 
         jMenuBar1.add(jMConsultas);
 
         jMSalir.setText("Salir");
+        jMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMSalirMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMSalir);
 
         setJMenuBar(jMenuBar1);
@@ -165,6 +178,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jEscritorio.add(fA);
         jEscritorio.moveToFront(fA);
     }//GEN-LAST:event_jMIManipulacionActionPerformed
+
+    private void jMIAlumnosMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAlumnosMaActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ConsultaAlumnosPorMateria fA = new ConsultaAlumnosPorMateria();
+        fA.setVisible(true);
+        jEscritorio.add(fA);
+        jEscritorio.moveToFront(fA);
+    }//GEN-LAST:event_jMIAlumnosMaActionPerformed
+
+    private void jMSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMSalirMouseClicked
+        int showConfirmDialog = JOptionPane.showConfirmDialog(this, "Esta seguro que desea salir?");
+        if(showConfirmDialog == 0){
+            System.exit(0);
+        }
+    }//GEN-LAST:event_jMSalirMouseClicked
 
     /**
      * @param args the command line arguments

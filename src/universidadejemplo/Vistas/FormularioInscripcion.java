@@ -72,6 +72,11 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Listado de Materias");
 
+        jCBAlumno.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBAlumnoItemStateChanged(evt);
+            }
+        });
         jCBAlumno.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -196,8 +201,8 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
 
     private void jCBAlumnoPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_jCBAlumnoPopupMenuWillBecomeVisible
         AlumnoData a1 = new AlumnoData();
-        Alumno al1 = new Alumno();
         jCBAlumno.removeAllItems();
+        jCBAlumno.addItem(null);
         try {
             for (Alumno alumno : a1.listarAlumnos()) {
                 jCBAlumno.addItem(alumno);
@@ -220,7 +225,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                 modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "No hay materias para inscribir al alumno");
+            JOptionPane.showMessageDialog(this, "Seleccione un alumno para obtener las materias");
         }
     }//GEN-LAST:event_jRBMateriaNoInscriptaActionPerformed
 
@@ -236,7 +241,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                 modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "No hay inscripciones del alumno seleccionado");
+            JOptionPane.showMessageDialog(this, "Seleccione un alumno para obtener las materias");
         }
     }//GEN-LAST:event_jRBMateriasInscriptasMouseClicked
 
@@ -269,6 +274,37 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Seleccione una opcion para eliminar la inscripcion");
         }
     }//GEN-LAST:event_jBAnularInscripcionActionPerformed
+
+    private void jCBAlumnoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBAlumnoItemStateChanged
+        if (jRBMateriasInscriptas.isSelected()) {
+            borrarFilas();
+            jBInscribir.setEnabled(false);
+            jBAnularInscripcion.setEnabled(true);
+            jRBMateriaNoInscripta.setSelected(false);
+            InscripcionData ida = new InscripcionData();
+            try {
+                Alumno al1 = (Alumno) jCBAlumno.getSelectedItem();
+                for (Materia materia : ida.obtenerMateriasCursadas(al1.getIdAlumno())) {
+                    modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
+                }
+            } catch (NullPointerException ex) {}
+        } else if (jRBMateriaNoInscripta.isSelected()) {
+            borrarFilas();
+            jRBMateriasInscriptas.setSelected(false);
+            jBInscribir.setEnabled(true);
+            jBAnularInscripcion.setEnabled(false);
+            jRBMateriaNoInscripta.setSelected(true);
+            InscripcionData ida = new InscripcionData();
+            try {
+                Alumno al1 = (Alumno) jCBAlumno.getSelectedItem();
+                for (Materia materia : ida.obtenerMateriasNoCursadas(al1.getIdAlumno())) {
+                    modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
+                }
+            } catch (NullPointerException ex) {}
+        } else {
+            borrarFilas();
+        }
+    }//GEN-LAST:event_jCBAlumnoItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

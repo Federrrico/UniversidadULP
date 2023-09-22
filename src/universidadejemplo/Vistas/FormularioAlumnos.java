@@ -255,18 +255,20 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jElimiinarActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-        limpiarCampos();
+        
+        Alumno alu;
         AlumnoData a1 = new AlumnoData();
         
         try {
             int dni=Integer.parseInt(jTDocumento.getText());
-            Alumno alu = a1.buscarAlumnoPorDni(dni);
+            alu = a1.buscarAlumnoPorDni(dni, 1);
             jTApellido.setText(alu.getApellido());
             jTNombre.setText(alu.getNombre());
             jTDocumento.setText(alu.getDni() + "");
             jRadioButton1.setSelected(true);
             jDateChooser1.setDate(Date.valueOf(alu.getFechaNacimiento()));
         }  catch (NullPointerException | NumberFormatException nf){
+            jTDocumento.setText("");
             JOptionPane.showMessageDialog(null, "Error al buscar alumno, verifique los datos ingresados");
         }        
     }//GEN-LAST:event_jBuscarActionPerformed
