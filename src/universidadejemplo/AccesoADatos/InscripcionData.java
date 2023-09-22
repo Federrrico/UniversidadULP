@@ -56,7 +56,6 @@ public class InscripcionData {
     public Inscripcion buscarInscripcion(int id) {
         Inscripcion inscripcion = null;
         String sql = "SELECT * FROM inscripcion WHERE idInscripto = ? AND estado = 1";
-//        PreparedStatement ps = null;
         try {
             PreparedStatement ps;
             ps = con.prepareStatement(sql);
@@ -80,7 +79,6 @@ public class InscripcionData {
     
     public void actualizarNota(int idAlumno, int idMateria, Double nota) {
         String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno=? AND idMateria=?";
-//        PreparedStatement ps = null;
         try {
             PreparedStatement ps;
             ps = con.prepareStatement(sql);

@@ -6,7 +6,6 @@
 package universidadejemplo.Vistas;
 
 import javax.swing.JOptionPane;
-import org.omg.IOP.CodecPackage.FormatMismatch;
 import universidadejemplo.AccesoADatos.*;
 import universidadejemplo.Entidades.Materia;
 
@@ -172,7 +171,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        dispose();        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
@@ -184,11 +183,10 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
                 jTAño.setText(mat.getAño() + "");
                 jTNombre.setText(mat.getNombre());
                 jRBEstado.setSelected(true);
-                
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Debes ingresar NUMEROS");
+                JOptionPane.showMessageDialog(this, "Debe ingresar el NUMERO de identificacion de la materia");
             } catch (NullPointerException ex) {
-                JOptionPane.showMessageDialog(null, "No existe la materia");
+                JOptionPane.showMessageDialog(this, "No existe la materia");
             }
         } else {
             jTCodigo.setEnabled(true);
@@ -196,8 +194,6 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             jTNombre.setText("");
             jRBEstado.setSelected(false);
         }
-        
-        
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
@@ -215,7 +211,9 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             int idMateria = Integer.parseInt(jTCodigo.getText());
             mt.eliminarMateria(idMateria);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Debes ingresar NUMEROS");
+            JOptionPane.showMessageDialog(this, "Debe ingresar el NUMERO de identificacion de la materia");
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "No existe la materia");
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
@@ -230,10 +228,10 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
                 al1.setEstado(true);
                 a1.guardarMateria(al1);
             } else {
-            JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
-        }
-        }catch(NumberFormatException ex){
-             JOptionPane.showMessageDialog(this,"Solo tenes que ingresar numeros");
+                JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros");
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 

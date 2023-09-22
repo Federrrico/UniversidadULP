@@ -6,15 +6,10 @@
 package universidadejemplo.Vistas;
 
 import com.toedter.calendar.JDateChooser;
-import java.sql.Connection;
 import java.sql.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Formatter;
-import java.util.Set;
 import javax.swing.JOptionPane;
 import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.AccesoADatos.Conexion;
@@ -33,27 +28,24 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         initComponents();
     }
     SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-
-    public String getFecha(JDateChooser jd) {//recibe jdate retorna string
+    
+//    recibe jdate retorna string
+    private String getFecha(JDateChooser jd) {
         if (jd.getDate() != null) {
             return formato.format(jd.getDate());
         } else {
             return null;
         }
-
+    }
+    
+    private void limpiarCampos() {
+        jTDocumento.setText("");
+        jTApellido.setText("");
+        jTNombre.setText("");
+        jRadioButton1.setSelected(false);
+        jDateChooser1.setCalendar(null);
     }
 
-//public Date a(String fecha){ //recibe string retorna Date
-//SimpleDateFormat fText= new SimpleDateFormat("dd-MM-yyyy");
-//    System.out.println(fecha);
-//try{
-//    java.util.Date fechaE= fText.parse(fecha);
-//return (Date) fechaE;
-//}catch(ParseException ex){
-//return null;
-//}
-//
-//}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,34 +215,28 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         Alumno al1 = new Alumno();
         String fecha = getFecha(jDateChooser1);
         try{
-        if (!jTDocumento.getText().isEmpty() && !jTApellido.getText().isEmpty()
-                && !jTNombre.getText().isEmpty()&& jDateChooser1.isEnabled()&&jRadioButton1.isSelected()) {
-            al1.setDni(Integer.parseInt(jTDocumento.getText()));
-            al1.setApellido(jTApellido.getText());
-            al1.setNombre(jTNombre.getText());
-            al1.setEstado(true);
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            al1.setFechaNacimiento(LocalDate.parse(fecha, dtf));
-            a1.guardarAlumno(al1);
-        }else{
-            JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
-        }}catch(NullPointerException e){
+            if (!jTDocumento.getText().isEmpty() && !jTApellido.getText().isEmpty()
+                    && !jTNombre.getText().isEmpty() && jDateChooser1.isEnabled() && jRadioButton1.isSelected()) {
+                al1.setDni(Integer.parseInt(jTDocumento.getText()));
+                al1.setApellido(jTApellido.getText());
+                al1.setNombre(jTNombre.getText());
+                al1.setEstado(true);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                al1.setFechaNacimiento(LocalDate.parse(fecha, dtf));
+                a1.guardarAlumno(al1);
+            } else {
+                JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
+            }
+        }catch(NullPointerException e){
             JOptionPane.showMessageDialog(this,"La fecha no ha sido Ingresada!!");
         }catch(NumberFormatException ex){
              JOptionPane.showMessageDialog(this,"Solo tenes que ingresar numeros");
         }
-        
+        limpiarCampos();
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
-     jTDocumento.setText("");
-     jTApellido.setText("");
-     jTNombre.setText("");
-     jRadioButton1.setSelected(false);
-     jDateChooser1.setCalendar(null);
-  
-  
-  
+        limpiarCampos();
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -258,24 +244,30 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jElimiinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jElimiinarActionPerformed
-       AlumnoData a1 = new AlumnoData();
-       int dni=Integer.parseInt(jTDocumento.getText());
-       a1.eliminarAlumnoporDni(dni);
+        AlumnoData a1 = new AlumnoData();
+        try {
+            int dni = Integer.parseInt(jTDocumento.getText());
+            a1.eliminarAlumnoporDni(dni);
+        } catch (NullPointerException | NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Verifique los datos ingresados e intente nuevamente");
+        }
+        limpiarCampos();
     }//GEN-LAST:event_jElimiinarActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
+        limpiarCampos();
         AlumnoData a1 = new AlumnoData();
-        int dni=Integer.parseInt(jTDocumento.getText());
-        Alumno alu = new Alumno();
+        
         try {
-            alu = a1.buscarAlumnoPorDni(dni);
+            int dni=Integer.parseInt(jTDocumento.getText());
+            Alumno alu = a1.buscarAlumnoPorDni(dni);
             jTApellido.setText(alu.getApellido());
             jTNombre.setText(alu.getNombre());
             jTDocumento.setText(alu.getDni() + "");
             jRadioButton1.setSelected(true);
             jDateChooser1.setDate(Date.valueOf(alu.getFechaNacimiento()));
-        }  catch (NullPointerException ex){
-            JOptionPane.showMessageDialog(null, "No existe el alumno");
+        }  catch (NullPointerException | NumberFormatException nf){
+            JOptionPane.showMessageDialog(null, "Error al buscar alumno, verifique los datos ingresados");
         }        
     }//GEN-LAST:event_jBuscarActionPerformed
 

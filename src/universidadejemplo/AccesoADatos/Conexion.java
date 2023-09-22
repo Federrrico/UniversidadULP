@@ -18,26 +18,23 @@ import java.util.logging.Logger;
 public class Conexion {
     private static final String URL = "jdbc:mariadb://localhost:3306/";
     private static final String DB = "universidadulp";
-    private static final String USUARIO = "root";    // root
-    private static final String PASSWORD = "";   // ""
+    private static final String USUARIO = "root";
+    private static final String PASSWORD = "";
     
-    private static Connection connection;  // lo que importa  
+    private static Connection connection; 
 
-    private Conexion(){}
-    
-      
-    public static Connection getConexion(){
-        if (connection==null) {  // si es la primera vez
+    private Conexion() {
+    }
+
+    public static Connection getConexion() {
+        if (connection == null) {
             try {
-                //cargamos las clases de mariadb que implementan JDBC
                 Class.forName("org.mariadb.jdbc.Driver");
-//                connection = DriverManager.getConnection(URL+DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC" +
-//                "&user=" + USUARIO + "&password=" + PASSWORD);
-                connection = DriverManager.getConnection(URL+DB,USUARIO,PASSWORD);
-            } catch (SQLException | ClassNotFoundException ex) {  // si me olvide de importar la libreria // error al cargar los drivers
+                connection = DriverManager.getConnection(URL + DB, USUARIO, PASSWORD);
+            } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return connection; // retorna la conexion establecida
+        return connection;
     }
 }

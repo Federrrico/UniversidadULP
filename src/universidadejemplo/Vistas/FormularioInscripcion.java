@@ -198,26 +198,29 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         AlumnoData a1 = new AlumnoData();
         Alumno al1 = new Alumno();
         jCBAlumno.removeAllItems();
-        for (Alumno alumno : a1.listarAlumnos()) {
-            jCBAlumno.addItem(alumno);
+        try {
+            for (Alumno alumno : a1.listarAlumnos()) {
+                jCBAlumno.addItem(alumno);
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "No hay alumnos cargados en la base de datos");
         }
-        
     }//GEN-LAST:event_jCBAlumnoPopupMenuWillBecomeVisible
 
     private void jRBMateriaNoInscriptaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBMateriaNoInscriptaActionPerformed
-        jRBMateriasInscriptas.setSelected(false);
-        borrarFilas();    
+        borrarFilas();
+        jRBMateriasInscriptas.setSelected(false);        
         jBInscribir.setEnabled(true);
         jBAnularInscripcion.setEnabled(false);
-       
         jRBMateriaNoInscripta.setSelected(true);
         InscripcionData ida = new InscripcionData();
-        Alumno al1 = (Alumno) jCBAlumno.getSelectedItem();      
-        
-        String lo = jCBAlumno.getSelectedItem().toString();
- 
-        for (Materia materia : ida.obtenerMateriasNoCursadas(al1.getIdAlumno())) {
-            modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
+        try {
+            Alumno al1 = (Alumno) jCBAlumno.getSelectedItem();            
+            for (Materia materia : ida.obtenerMateriasNoCursadas(al1.getIdAlumno())) {
+                modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "No hay materias para inscribir al alumno");
         }
     }//GEN-LAST:event_jRBMateriaNoInscriptaActionPerformed
 
@@ -227,41 +230,42 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jBAnularInscripcion.setEnabled(true);
         jRBMateriaNoInscripta.setSelected(false);
         InscripcionData ida = new InscripcionData();
-        Alumno al1 = (Alumno) jCBAlumno.getSelectedItem();      
-        
-        String lo = jCBAlumno.getSelectedItem().toString();
- 
-        for (Materia materia : ida.obtenerMateriasCursadas(al1.getIdAlumno())) {
-            modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
+        try {
+            Alumno al1 = (Alumno) jCBAlumno.getSelectedItem();
+            for (Materia materia : ida.obtenerMateriasCursadas(al1.getIdAlumno())) {
+                modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAño()});
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "No hay inscripciones del alumno seleccionado");
         }
     }//GEN-LAST:event_jRBMateriasInscriptasMouseClicked
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        dispose();        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInscribirActionPerformed
         MateriaData matD = new MateriaData();
         Alumno alu = (Alumno) jCBAlumno.getSelectedItem();
         InscripcionData insData = new InscripcionData();
-        try{
-        int matId = Integer.parseInt(modelo.getValueAt(jTMaterias.getSelectedRow(), 0).toString());
-        insData.guardarInscripcion(new Inscripcion(alu, matD.buscarMateria(matId), 0D));
-        modelo.removeRow(jTMaterias.getSelectedRow());
-        } catch (ArrayIndexOutOfBoundsException ex){
+        try {
+            int matId = Integer.parseInt(modelo.getValueAt(jTMaterias.getSelectedRow(), 0).toString());
+            insData.guardarInscripcion(new Inscripcion(alu, matD.buscarMateria(matId), 0D));
+            modelo.removeRow(jTMaterias.getSelectedRow());
+        } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(this, "Seleccione una opcion para realizar la inscripcion");
         }
     }//GEN-LAST:event_jBInscribirActionPerformed
 
     private void jBAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnularInscripcionActionPerformed
         InscripcionData insData = new InscripcionData();
-        try{
-        int matId = Integer.parseInt(modelo.getValueAt(jTMaterias.getSelectedRow(), 0).toString());
-        Alumno alu = (Alumno) jCBAlumno.getSelectedItem();
-        int aluId = alu.getIdAlumno();
-        insData.borrarInscripcion(aluId, matId);
-        modelo.removeRow(jTMaterias.getSelectedRow());
-        } catch (ArrayIndexOutOfBoundsException ex){
+        try {
+            int matId = Integer.parseInt(modelo.getValueAt(jTMaterias.getSelectedRow(), 0).toString());
+            Alumno alu = (Alumno) jCBAlumno.getSelectedItem();
+            int aluId = alu.getIdAlumno();
+            insData.borrarInscripcion(aluId, matId);
+            modelo.removeRow(jTMaterias.getSelectedRow());
+        } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(this, "Seleccione una opcion para eliminar la inscripcion");
         }
     }//GEN-LAST:event_jBAnularInscripcionActionPerformed
