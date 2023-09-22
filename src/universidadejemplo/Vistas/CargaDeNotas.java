@@ -202,7 +202,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         InscripcionData insData = new InscripcionData();
-        modelo.isCellEditable(jTMaterias.getSelectedRow(), 0);
+        modelo.isCellEditable(jTMaterias.getSelectedRow(), 2);
 
         try {
             int matId = Integer.parseInt(modelo.getValueAt(jTMaterias.getSelectedRow(), 0).toString());
