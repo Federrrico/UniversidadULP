@@ -44,6 +44,32 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             modelo.removeRow(f);
         }
     }
+    
+    private void cargarTabla(){
+        borrarFilas();
+        modelo.isCellEditable(jTMaterias.getSelectedRow(), 2);
+
+        int i = 0;
+        Alumno al1 = (Alumno) jCBAlumnos.getSelectedItem();
+
+        InscripcionData ida = new InscripcionData();
+
+        try {
+            List<Inscripcion> inscripciones = new ArrayList<>(ida.listarInscripciones());
+            List<Materia> materias = new ArrayList<>(ida.obtenerMateriasCursadas(al1.getIdAlumno()));
+            
+            for (Inscripcion inscripcion : inscripciones) {
+                if (inscripcion.getIdAlumno().getIdAlumno() == al1.getIdAlumno()
+                        && inscripcion.getIdMateria().getIdMateria() == materias.get(i).getIdMateria()) {
+                    modelo.addRow(new Object[]{materias.get(i).getIdMateria(), materias.get(i).getNombre(),
+                        inscripcion.getNota()});
+                    i++;
+                }
+            }
+        } catch (NullPointerException ex) {
+            return;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -172,28 +198,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCBAlumnosPopupMenuWillBecomeVisible
 
     private void jCBAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBAlumnosItemStateChanged
-        borrarFilas();
-        modelo.isCellEditable(jTMaterias.getSelectedRow(), 2);
-        
-        int i = 0;
-        Alumno al1 = (Alumno) jCBAlumnos.getSelectedItem();
-        
-        InscripcionData ida = new InscripcionData();
-        
-        try {
-            List<Inscripcion> inscripciones = new ArrayList<>(ida.listarInscripciones());
-            List<Materia> materias = new ArrayList<>(ida.obtenerMateriasCursadas(al1.getIdAlumno()));
-            for (Inscripcion inscripcion : inscripciones) {
-                if (inscripcion.getIdAlumno().getIdAlumno() == al1.getIdAlumno()
-                        && inscripcion.getIdMateria().getIdMateria() == materias.get(i).getIdMateria()) {
-                    modelo.addRow(new Object[]{materias.get(i).getIdMateria(), materias.get(i).getNombre(),
-                        inscripcion.getNota()});
-                    i++;
-                }
-            }
-        } catch (NullPointerException ex) {
-            return;
-        }
+        cargarTabla();
     }//GEN-LAST:event_jCBAlumnosItemStateChanged
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -203,15 +208,22 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         InscripcionData insData = new InscripcionData();
         modelo.isCellEditable(jTMaterias.getSelectedRow(), 2);
-
         try {
-            int matId = Integer.parseInt(modelo.getValueAt(jTMaterias.getSelectedRow(), 0).toString());
-            Double nota = Double.parseDouble(modelo.getValueAt(jTMaterias.getSelectedRow(), 2).toString());
-            Alumno alu = (Alumno) jCBAlumnos.getSelectedItem();
-            int aluId = alu.getIdAlumno();
-            insData.actualizarNota(aluId, matId, nota);
+            if (Double.parseDouble(modelo.getValueAt(jTMaterias.getSelectedRow(), 2).toString()) > 10 || Double.parseDouble(modelo.getValueAt(jTMaterias.getSelectedRow(), 2).toString()) < 0) {
+                JOptionPane.showMessageDialog(this, "La nota debe estar entre 0 y 10");
+                cargarTabla();
+            } else {
+                int matId = Integer.parseInt(modelo.getValueAt(jTMaterias.getSelectedRow(), 0).toString());
+                Double nota = Double.parseDouble(modelo.getValueAt(jTMaterias.getSelectedRow(), 2).toString());
+                Alumno alu = (Alumno) jCBAlumnos.getSelectedItem();
+                int aluId = alu.getIdAlumno();
+                insData.actualizarNota(aluId, matId, nota);
+            }
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(this, "Seleccione una opcion para modificar la nota");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Las notas deben ser numeradas");
+            cargarTabla();
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 

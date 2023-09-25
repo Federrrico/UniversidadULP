@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showConfirmDialog;
 import universidadejemplo.Entidades.Materia;
 /**
  *
@@ -26,23 +27,46 @@ public class MateriaData {
     }
     
     public void guardarMateria(Materia materia) {
-        
+        MateriaData matD = new MateriaData();        
+        Materia mat = matD.buscarMateriaEliminada(materia.getNombre());
         String sql = "INSERT INTO materia (nombre, año, estado) VALUES (?, ?, ?)";
+        String sql2 = "UPDATE materia SET estado= 1 WHERE nombre = ?;";
         
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, materia.getNombre());
-            ps.setInt(2, materia.getAño());
-            ps.setBoolean(3, materia.isEstado());
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                materia.setIdMateria(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Materia añadida con exito con ID: " + materia.getIdMateria());
+        if (mat == null) {
+            try {
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, materia.getNombre());
+                ps.setInt(2, materia.getAño());
+                ps.setBoolean(3, materia.isEstado());
+                ps.executeUpdate();
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    materia.setIdMateria(rs.getInt(1));
+                    JOptionPane.showMessageDialog(null, "Materia añadida con exito con ID: " + materia.getIdMateria());
+                }
+                ps.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia " + ex.getMessage());
             }
-            ps.close();            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia "+ex.getMessage());
+        }else {
+            int showConfirmDialog = JOptionPane.showConfirmDialog(null, "La materia " + mat.toString() + " fue dada de baja \n "
+                    + "Desea habilitarla nuevamente?");
+
+            if (showConfirmDialog == 0) {
+                try {
+                    PreparedStatement ps = con.prepareStatement(sql2);
+                    ps.setString(1, materia.getNombre());
+                    int exito = ps.executeUpdate();
+                    if (exito == 1) {
+                        JOptionPane.showMessageDialog(null, "Se actualizo estado de Materia" + mat.toString());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "La materia no existe");
+                    }
+                    ps.close();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia " + ex.getMessage());
+                }
+            }
         }
     }
     
@@ -52,7 +76,7 @@ public class MateriaData {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1,id );
+            ps.setInt(1,id );           
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 materia=new Materia();
@@ -68,6 +92,30 @@ public class MateriaData {
         return materia;
     }
     
+    public Materia buscarMateriaEliminada(String nombre) {
+        Materia materia = null;
+        String sql = "SELECT idMateria, nombre, año FROM materia WHERE nombre = ? AND estado = 0";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1,nombre );           
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                materia=new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAño(rs.getInt("año"));
+                materia.setEstado(true);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia "+ex.getMessage());
+        }
+        return materia;
+    }
+    
+    
+    
     public void modificarMateria(Materia materia) {
         String sql = "UPDATE materia SET nombre= ?, año= ? WHERE idMateria = ?;";
         PreparedStatement ps = null;
@@ -76,9 +124,7 @@ public class MateriaData {
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAño());
             ps.setInt(3, materia.getIdMateria());
-            int exito = ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            
+            int exito = ps.executeUpdate();            
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Modificada Exitosamente.");
             } else {

@@ -20,6 +20,8 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
      */
     public FormularioMateria() {
         initComponents();
+        jBGuardar.setEnabled(false);
+        jBEliminar.setEnabled(false);
     }
 
     /**
@@ -175,6 +177,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
+        jBGuardar.setEnabled(false);
         if (jTCodigo.isEnabled()) {
             MateriaData mt = new MateriaData();
             try {
@@ -183,6 +186,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
                 jTAño.setText(mat.getAño() + "");
                 jTNombre.setText(mat.getNombre());
                 jRBEstado.setSelected(true);
+                jBEliminar.setEnabled(true);
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar el NUMERO de identificacion de la materia");
             } catch (NullPointerException ex) {
@@ -197,6 +201,8 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
+        jBGuardar.setEnabled(true);
+        jBEliminar.setEnabled(false);
         jTAño.setText("");
         jTNombre.setText("");
         jRBEstado.setSelected(false);
