@@ -2,7 +2,7 @@
 
 <ClassDiagram name="UniversidadULP">
   <ClassDiagramComponents>
-    <Class name="AlumnoData" package="universidadejemplo.AccesoADatos" visibility="public" xPosition="20.0" yPosition="20.0">
+    <Class name="AlumnoData" package="universidadejemplo.AccesoADatos" visibility="public" xPosition="522.0" yPosition="419.0">
       <Fields>
         <Field name="con" type="Connection" visibility="private"/>
       </Fields>
@@ -32,7 +32,7 @@
         <Method name="listarAlumnos" returnType="List&lt;Alumno&gt;" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Conexion" package="universidadejemplo.AccesoADatos" visibility="public" xPosition="320.0" yPosition="20.0">
+    <Class name="Conexion" package="universidadejemplo.AccesoADatos" visibility="public" xPosition="84.0" yPosition="52.0">
       <Fields>
         <Field name="URL" type="String" visibility="private" isStatic="true" isFinal="true"/>
         <Field name="DB" type="String" visibility="private" isStatic="true" isFinal="true"/>
@@ -47,7 +47,7 @@
         <Method name="getConexion" returnType="Connection" visibility="public" isStatic="true"/>
       </Methods>
     </Class>
-    <Class name="InscripcionData" package="universidadejemplo.AccesoADatos" visibility="public" xPosition="620.0" yPosition="20.0">
+    <Class name="InscripcionData" package="universidadejemplo.AccesoADatos" visibility="public" xPosition="1099.0" yPosition="174.0">
       <Fields>
         <Field name="con" type="Connection" visibility="private"/>
         <Field name="materiaData" type="MateriaData" visibility="private"/>
@@ -84,7 +84,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="MateriaData" package="universidadejemplo.AccesoADatos" visibility="public" xPosition="920.0" yPosition="20.0">
+    <Class name="MateriaData" package="universidadejemplo.AccesoADatos" visibility="public" xPosition="539.0" yPosition="32.0">
       <Fields>
         <Field name="con" type="Connection" visibility="private"/>
       </Fields>
@@ -107,7 +107,7 @@
         <Method name="listarMaterias" returnType="List&lt;Materia&gt;" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Alumno" package="universidadejemplo.Entidades" visibility="public" xPosition="1220.0" yPosition="20.0">
+    <Class name="Alumno" package="universidadejemplo.Entidades" visibility="public" xPosition="973.0" yPosition="651.0">
       <Fields>
         <Field name="idAlumno" type="int" visibility="private"/>
         <Field name="dni" type="int" visibility="private"/>
@@ -166,7 +166,7 @@
         <Method name="toString" returnType="String" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Inscripcion" package="universidadejemplo.Entidades" visibility="public" xPosition="1520.0" yPosition="20.0">
+    <Class name="Inscripcion" package="universidadejemplo.Entidades" visibility="public" xPosition="1952.0" yPosition="717.0">
       <Fields>
         <Field name="idInscripcion" type="int" visibility="private"/>
         <Field name="alumno" type="Alumno" visibility="private"/>
@@ -211,7 +211,7 @@
         <Method name="toString" returnType="String" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Materia" package="universidadejemplo.Entidades" visibility="public" xPosition="1820.0" yPosition="20.0">
+    <Class name="Materia" package="universidadejemplo.Entidades" visibility="public" xPosition="2000.0" yPosition="9.0">
       <Fields>
         <Field name="idMateria" type="int" visibility="private"/>
         <Field name="nombre" type="String" visibility="private"/>
@@ -252,7 +252,7 @@
         <Method name="toString" returnType="String" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="UniversidadEjemplo" package="universidadejemplo" visibility="public" xPosition="2120.0" yPosition="20.0">
+    <Class name="UniversidadEjemplo" package="universidadejemplo" visibility="public" xPosition="191.0" yPosition="383.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -261,7 +261,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="CargaDeNotas" package="universidadejemplo.Vistas" visibility="public" xPosition="20.0" yPosition="420.0">
+    <Class name="CargaDeNotas" package="universidadejemplo.Vistas" visibility="public" xPosition="227.0" yPosition="1364.0">
       <Fields>
         <Field name="modelo" type="DefaultTableModel" visibility="private"/>
         <Field name="jBGuardar" type="javax.swing.JButton" visibility="private"/>
@@ -277,8 +277,7 @@
       </Constructors>
       <Methods>
         <Method name="borrarFilas" returnType="void" visibility="private"/>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jCBAlumnosPopupMenuWillBecomeVisible" returnType="void" visibility="private">
           <Argument type="javax.swing.event.PopupMenuEvent" name="evt"/>
         </Method>
@@ -293,7 +292,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="ConsultaAlumnosPorMateria" package="universidadejemplo.Vistas" visibility="public" xPosition="320.0" yPosition="420.0">
+    <Class name="ConsultaAlumnosPorMateria" package="universidadejemplo.Vistas" visibility="public" xPosition="2626.0" yPosition="47.0">
       <Fields>
         <Field name="modelo" type="DefaultTableModel" visibility="private"/>
         <Field name="jBSalir" type="javax.swing.JButton" visibility="private"/>
@@ -308,8 +307,7 @@ void" visibility="private"/>
       </Constructors>
       <Methods>
         <Method name="borrarFilas" returnType="void" visibility="private"/>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jCBMateriasActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -324,7 +322,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="FormularioAlumnos" package="universidadejemplo.Vistas" visibility="public" xPosition="620.0" yPosition="420.0">
+    <Class name="FormularioAlumnos" package="universidadejemplo.Vistas" visibility="public" xPosition="1415.0" yPosition="1902.0">
       <Fields>
         <Field name="formato" type="SimpleDateFormat" visibility="package"/>
         <Field name="jBGuardar" type="javax.swing.JButton" visibility="private"/>
@@ -352,8 +350,7 @@ void" visibility="private"/>
           <Argument type="JDateChooser" name="jd"/>
         </Method>
         <Method name="limpiarCampos" returnType="void" visibility="private"/>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jBGuardarActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -371,7 +368,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="FormularioInscripcion" package="universidadejemplo.Vistas" visibility="public" xPosition="920.0" yPosition="420.0">
+    <Class name="FormularioInscripcion" package="universidadejemplo.Vistas" visibility="public" xPosition="942.0" yPosition="1364.0">
       <Fields>
         <Field name="modelo" type="DefaultTableModel" visibility="private"/>
         <Field name="jBAnularInscripcion" type="javax.swing.JButton" visibility="private"/>
@@ -391,8 +388,7 @@ void" visibility="private"/>
       </Constructors>
       <Methods>
         <Method name="borrarFilas" returnType="void" visibility="private"/>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jCBAlumnoPopupMenuWillBecomeVisible" returnType="void" visibility="private">
           <Argument type="javax.swing.event.PopupMenuEvent" name="evt"/>
         </Method>
@@ -416,7 +412,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="FormularioMateria" package="universidadejemplo.Vistas" visibility="public" xPosition="1220.0" yPosition="420.0">
+    <Class name="FormularioMateria" package="universidadejemplo.Vistas" visibility="public" xPosition="655.0" yPosition="1902.0">
       <Fields>
         <Field name="jBEliminar" type="javax.swing.JButton" visibility="private"/>
         <Field name="jBGuardar" type="javax.swing.JButton" visibility="private"/>
@@ -437,8 +433,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jBSalirActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -456,7 +451,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="MenuPrincipal" package="universidadejemplo.Vistas" visibility="public" xPosition="1520.0" yPosition="420.0">
+    <Class name="MenuPrincipal" package="universidadejemplo.Vistas" visibility="public" xPosition="40.0" yPosition="701.0">
       <Fields>
         <Field name="jEscritorio" type="javax.swing.JDesktopPane" visibility="private"/>
         <Field name="jMAdministracion" type="javax.swing.JMenu" visibility="private"/>
@@ -477,8 +472,7 @@ void" visibility="private"/>
         <Constructor visibility="public"/>
       </Constructors>
       <Methods>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="jMIFormularioAlumnosActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -504,19 +498,19 @@ void" visibility="private"/>
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="alumnoData" source="universidadejemplo.AccesoADatos.InscripcionData" target="universidadejemplo.AccesoADatos.AlumnoData" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="universidadejemplo.AccesoADatos.InscripcionData" target="universidadejemplo.Entidades.Inscripcion" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="universidadejemplo.AccesoADatos.InscripcionData" target="universidadejemplo.Entidades.Alumno" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="jCBAlumno" source="universidadejemplo.Vistas.FormularioInscripcion" target="universidadejemplo.Entidades.Alumno" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="universidadejemplo.AccesoADatos.MateriaData" target="universidadejemplo.Entidades.Materia" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="jCBMaterias" source="universidadejemplo.Vistas.ConsultaAlumnosPorMateria" target="universidadejemplo.Entidades.Materia" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="universidadejemplo.Entidades.Inscripcion" target="universidadejemplo.Entidades.Materia" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="universidadejemplo.AccesoADatos.AlumnoData" target="universidadejemplo.Entidades.Alumno" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="materiaData" source="universidadejemplo.AccesoADatos.InscripcionData" target="universidadejemplo.AccesoADatos.MateriaData" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="universidadejemplo.AccesoADatos.InscripcionData" target="universidadejemplo.Entidades.Materia" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="universidadejemplo.Entidades.Inscripcion" target="universidadejemplo.Entidades.Alumno" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="alumno" source="universidadejemplo.Entidades.Inscripcion" target="universidadejemplo.Entidades.Alumno" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="jCBAlumnos" source="universidadejemplo.Vistas.CargaDeNotas" target="universidadejemplo.Entidades.Alumno" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="universidadejemplo.AccesoADatos.InscripcionData" target="universidadejemplo.Entidades.Alumno" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="universidadejemplo.AccesoADatos.AlumnoData" target="universidadejemplo.Entidades.Alumno" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="universidadejemplo.Entidades.Inscripcion" target="universidadejemplo.Entidades.Alumno" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="jCBMaterias" source="universidadejemplo.Vistas.ConsultaAlumnosPorMateria" target="universidadejemplo.Entidades.Materia" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="universidadejemplo.AccesoADatos.MateriaData" target="universidadejemplo.Entidades.Materia" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="universidadejemplo.Entidades.Inscripcion" target="universidadejemplo.Entidades.Materia" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="jCBAlumno" source="universidadejemplo.Vistas.FormularioInscripcion" target="universidadejemplo.Entidades.Alumno" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="alumno" source="universidadejemplo.Entidades.Inscripcion" target="universidadejemplo.Entidades.Alumno" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="alumnoData" source="universidadejemplo.AccesoADatos.InscripcionData" target="universidadejemplo.AccesoADatos.AlumnoData" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="universidadejemplo.AccesoADatos.InscripcionData" target="universidadejemplo.Entidades.Materia" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="materiaData" source="universidadejemplo.AccesoADatos.InscripcionData" target="universidadejemplo.AccesoADatos.MateriaData" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="materia" source="universidadejemplo.Entidades.Inscripcion" target="universidadejemplo.Entidades.Materia" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
