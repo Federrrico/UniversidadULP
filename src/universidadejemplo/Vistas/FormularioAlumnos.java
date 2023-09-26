@@ -70,31 +70,33 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         jElimiinar = new javax.swing.JButton();
         jBGuardar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
+        setPreferredSize(new java.awt.Dimension(470, 494));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Documento:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 200, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         jLabel3.setText("Apellido:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 238, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         jLabel4.setText("Nombre:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 276, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
 
         jLabel5.setText("Estado:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 311, -1, -1));
-        getContentPane().add(jTDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 150, 20));
-        getContentPane().add(jTApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 150, 20));
-        getContentPane().add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 150, 20));
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, -1, 20));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, 30));
+        getContentPane().add(jTDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 150, 30));
+        getContentPane().add(jTApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 150, 30));
+        getContentPane().add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 150, 30));
+        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, -1, 30));
 
         jLabel6.setText("Fecha de nacimiento:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 160, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, 30));
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 170, 30));
 
         jBuscar.setText("Buscar");
         jBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +104,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
                 jBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, -1, -1));
+        getContentPane().add(jBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, -1, -1));
 
         jBNuevo.setText("Nuevo");
         jBNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +112,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
                 jBNuevoActionPerformed(evt);
             }
         });
-        getContentPane().add(jBNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, 30));
+        getContentPane().add(jBNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, -1, 30));
 
         jElimiinar.setText("Eliminar");
         jElimiinar.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +120,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
                 jElimiinarActionPerformed(evt);
             }
         });
-        getContentPane().add(jElimiinar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, -1, 30));
+        getContentPane().add(jElimiinar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, -1, 30));
 
         jBGuardar.setText("Guardar");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +128,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
                 jBGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, -1, 30));
+        getContentPane().add(jBGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, -1, 30));
 
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -134,13 +136,20 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
                 jBSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, -1, 30));
+        getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, -1, 30));
+
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setText("    ALUMNOS");
+        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jLabel8.setOpaque(true);
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Recursos/alumnos.png"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 258, 186));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 170));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Recursos/logo.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 0, 203, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 0, 190, 170));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -225,6 +234,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JTextField jTApellido;
     private javax.swing.JTextField jTDocumento;
