@@ -32,6 +32,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
      */
     public CargaDeNotas() {
         initComponents();
+        setTitle("Carga de Notas");
         modelo.addColumn("ID");
         modelo.addColumn("NOMBRE");
         modelo.addColumn("NOTA");

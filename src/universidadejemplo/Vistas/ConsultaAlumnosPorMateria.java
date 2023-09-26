@@ -20,6 +20,7 @@ public class ConsultaAlumnosPorMateria extends javax.swing.JInternalFrame {
     
     public ConsultaAlumnosPorMateria() {
         initComponents();
+        setTitle("Consulta de Alumnos por Materia");
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("APELLIDO");

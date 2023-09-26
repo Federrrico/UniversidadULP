@@ -6,6 +6,7 @@
 package universidadejemplo.Vistas;
 
 
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +20,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
-        setTitle("Alumnos");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -156,16 +157,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMIFormularioAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormularioAlumnosActionPerformed
-    //   jEscritorio.removeAll();
+        for (JInternalFrame iframe : jEscritorio.getAllFrames()) {
+            jEscritorio.remove(iframe);
+        }
         jEscritorio.repaint();
         FormularioAlumnos fA = new FormularioAlumnos();
         fA.setVisible(true);
         jEscritorio.add(fA);
         jEscritorio.moveToFront(fA);
+        
     }//GEN-LAST:event_jMIFormularioAlumnosActionPerformed
 
     private void jMIFormMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormMateriaActionPerformed
-       // jEscritorio.removeAll();
+       for (JInternalFrame iframe : jEscritorio.getAllFrames()) {
+            jEscritorio.remove(iframe);
+        }
         jEscritorio.repaint();
         FormularioMateria fA = new FormularioMateria();
         fA.setVisible(true);
@@ -174,7 +180,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMIFormMateriaActionPerformed
 
     private void jMIManejoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIManejoActionPerformed
-        //jEscritorio.removeAll();
+        for (JInternalFrame iframe : jEscritorio.getAllFrames()) {
+            jEscritorio.remove(iframe);
+        }
         jEscritorio.repaint();
         FormularioInscripcion fA = new FormularioInscripcion();
         fA.setVisible(true);
@@ -183,7 +191,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMIManejoActionPerformed
 
     private void jMIManipulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIManipulacionActionPerformed
-        //jEscritorio.removeAll();
+        for (JInternalFrame iframe : jEscritorio.getAllFrames()) {
+            jEscritorio.remove(iframe);
+        }
         jEscritorio.repaint();
         CargaDeNotas fA = new CargaDeNotas();
         fA.setVisible(true);
@@ -192,7 +202,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMIManipulacionActionPerformed
 
     private void jMIAlumnosMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIAlumnosMaActionPerformed
-        //jEscritorio.removeAll();
+        for (JInternalFrame iframe : jEscritorio.getAllFrames()) {
+            jEscritorio.remove(iframe);
+        }
         jEscritorio.repaint();
         ConsultaAlumnosPorMateria fA = new ConsultaAlumnosPorMateria();
         fA.setVisible(true);

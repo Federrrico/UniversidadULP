@@ -20,6 +20,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
      */
     public FormularioMateria() {
         initComponents();
+        setTitle("Materias");
         jBGuardar.setEnabled(false);
         jBEliminar.setEnabled(false);
     }

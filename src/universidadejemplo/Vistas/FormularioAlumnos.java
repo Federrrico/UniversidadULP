@@ -26,6 +26,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
      */
     public FormularioAlumnos() {
         initComponents();
+        setTitle("Alumnos");
     }
     SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
     

@@ -25,6 +25,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
      */
     public FormularioInscripcion() {
         initComponents();
+        setTitle("Formulario de Inscripcion");
         modelo.addColumn("ID");
         modelo.addColumn("NOMBRE");
         modelo.addColumn("AÑO");
