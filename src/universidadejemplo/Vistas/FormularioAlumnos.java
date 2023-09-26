@@ -90,6 +90,12 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Estado:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, 30));
+
+        jTDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTDocumentoKeyPressed(evt);
+            }
+        });
         getContentPane().add(jTDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 150, 30));
         getContentPane().add(jTApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 150, 30));
         getContentPane().add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 150, 30));
@@ -161,9 +167,11 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         AlumnoData a1 = new AlumnoData();
         Alumno al1 = new Alumno();
         String fecha = getFecha(jDateChooser1);
+        
         try{
             if (!jTDocumento.getText().isEmpty() && !jTApellido.getText().isEmpty()
-                    && !jTNombre.getText().isEmpty() && jDateChooser1.isEnabled() && jRadioButton1.isSelected()) {
+                    && !jTNombre.getText().isEmpty() && jDateChooser1.isEnabled() && jRadioButton1.isSelected()
+                    ) {
                 al1.setDni(Integer.parseInt(jTDocumento.getText()));
                 al1.setApellido(jTApellido.getText());
                 al1.setNombre(jTNombre.getText());
@@ -177,7 +185,11 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         }catch(NullPointerException e){
             JOptionPane.showMessageDialog(this,"La fecha no ha sido Ingresada!!");
         }catch(NumberFormatException ex){
-             JOptionPane.showMessageDialog(this,"Solo tenes que ingresar numeros");
+            if(jTDocumento.getText().length() > 8){
+                JOptionPane.showMessageDialog(this,"Excediste los digitos permitidos");
+            }else{
+             JOptionPane.showMessageDialog(this,"Solo tenes que ingresar numeros" +ex.getMessage());
+            }
         }
         limpiarCampos();
     }//GEN-LAST:event_jBGuardarActionPerformed
@@ -219,6 +231,14 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al buscar alumno, verifique los datos ingresados");
         }        
     }//GEN-LAST:event_jBuscarActionPerformed
+
+    private void jTDocumentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDocumentoKeyPressed
+          
+        if(jTDocumento.getText().length() > 8){
+                JOptionPane.showMessageDialog(this,"Excediste los digitos permitidos");
+                jTDocumento.setText("");
+            }
+    }//GEN-LAST:event_jTDocumentoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
