@@ -167,7 +167,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         AlumnoData a1 = new AlumnoData();
         Alumno al1 = new Alumno();
         String fecha = getFecha(jDateChooser1);
-        
+        int prueba;
         try{
             if (!jTDocumento.getText().isEmpty() && !jTApellido.getText().isEmpty()
                     && !jTNombre.getText().isEmpty() && jDateChooser1.isEnabled() && jRadioButton1.isSelected()
