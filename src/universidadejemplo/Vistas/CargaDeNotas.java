@@ -96,7 +96,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Seleccione un alumno:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, 30));
 
         jCBAlumnos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -112,7 +112,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                 jCBAlumnosPopupMenuWillBecomeVisible(evt);
             }
         });
-        getContentPane().add(jCBAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 172, 30));
+        getContentPane().add(jCBAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 190, 270, 30));
 
         jTMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,7 +127,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTMaterias);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 385, 107));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 410, 107));
 
         jBGuardar.setText("Guardar");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {

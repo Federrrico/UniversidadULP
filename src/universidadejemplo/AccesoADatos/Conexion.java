@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,8 +32,10 @@ public class Conexion {
             try {
                 Class.forName("org.mariadb.jdbc.Driver");
                 connection = DriverManager.getConnection(URL + DB, USUARIO, PASSWORD);
-            } catch (SQLException | ClassNotFoundException ex) {
-                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Error al cargar el Driver");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error conectarse a la BD");
             }
         }
         return connection;
