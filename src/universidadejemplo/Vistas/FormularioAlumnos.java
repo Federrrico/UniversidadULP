@@ -254,7 +254,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         if (!(numeros)) {
             evt.consume();
         }
-        if ((jTDocumento.getText().length()>=8)) {
+        if ((jTDocumento.getText().length()>=11)) {
             evt.consume();
         }
     }//GEN-LAST:event_jTDocumentoKeyTyped
