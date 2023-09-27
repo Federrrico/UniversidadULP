@@ -249,28 +249,36 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jTApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTApellidoKeyReleased
-        if (jTApellido.getText().substring(jTApellido.getText().length() - 1).matches("[0-9]")) {
+       try{ if (jTApellido.getText().substring(jTApellido.getText().length() - 1).matches("[0-9]")) {
             JOptionPane.showMessageDialog(this, "No se permiten numeros");
             jTApellido.setText("");
+        }
+       }catch(StringIndexOutOfBoundsException e){
+        
         }
     }//GEN-LAST:event_jTApellidoKeyReleased
 
     private void jTDocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDocumentoKeyReleased
-        if (jTDocumento.getText().length() > 8) {
-            JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
-            jTDocumento.setText("");
-        }
-        
-        if (jTDocumento.getText().substring(jTDocumento.getText().length() - 1).matches("[aA-zZ]")) {
-            JOptionPane.showMessageDialog(this, "No se permiten letras");
-            jTDocumento.setText("");
+        try {
+            if (jTDocumento.getText().length() > 8) {
+                JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
+                jTDocumento.setText("");
+            }
+            if (jTDocumento.getText().substring(jTDocumento.getText().length() - 1).matches("[aA-zZ]")) {
+                JOptionPane.showMessageDialog(this, "No se permiten letras");
+                jTDocumento.setText("");
+            }
+        } catch (StringIndexOutOfBoundsException e) {
         }
     }//GEN-LAST:event_jTDocumentoKeyReleased
 
     private void jTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyReleased
-        if (jTNombre.getText().substring(jTNombre.getText().length() - 1).matches("[0-9]")) {
+       try{ if (jTNombre.getText().substring(jTNombre.getText().length() - 1).matches("[0-9]")) {
             JOptionPane.showMessageDialog(this, "No se permiten numeros");
             jTNombre.setText("");
+        }  
+       }catch(StringIndexOutOfBoundsException e){
+        
         }
     }//GEN-LAST:event_jTNombreKeyReleased
 

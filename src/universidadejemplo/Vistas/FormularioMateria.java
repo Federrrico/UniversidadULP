@@ -5,6 +5,8 @@
  */
 package universidadejemplo.Vistas;
 
+import java.time.LocalDate;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import universidadejemplo.AccesoADatos.*;
 import universidadejemplo.Entidades.Materia;
@@ -199,9 +201,11 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         MateriaData a1 = new MateriaData();
         Materia al1 = new Materia();
-        if (jTAño.getText().length() == 4) {
-            try {
-                if (!jTNombre.getText().isEmpty() && jRBEstado.isSelected()
+        
+     
+        try {
+            if (jTAño.getText().length() == 4 && Integer.parseInt(jTAño.getText()) <= (LocalDate.now().getYear())) {
+                if (!jTNombre.getText().isEmpty()&& jRBEstado.isSelected()
                         && !jTAño.getText().isEmpty()) {
                     al1.setNombre(jTNombre.getText().toLowerCase());
                     al1.setAño(Integer.parseInt(jTAño.getText()));
@@ -210,40 +214,49 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
                 }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros");
+            } else {
+                JOptionPane.showMessageDialog(this, "Verifique la fecha ingresada, ej: 2000");
+                jTAño.setText("");
+                jTNombre.setText("");
+                jRBEstado.setSelected(false);
             }
-        }else {
-            JOptionPane.showMessageDialog(this, "Verifique la fecha ingresada, ej: 2000");
-            jTAño.setText("");
-            jTNombre.setText("");
-            jRBEstado.setSelected(false);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros");
         }
 
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jTCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCodigoKeyReleased
-        if (jTCodigo.getText().substring(jTCodigo.getText().length() - 1).matches("[aA-zZ]")) {
-            JOptionPane.showMessageDialog(this, "No se permiten letras");
-            jTCodigo.setText("");
+        try {
+            if (jTCodigo.getText().substring(jTCodigo.getText().length() - 1).matches("[aA-zZ]")) {
+                JOptionPane.showMessageDialog(this, "No se permiten letras");
+                jTCodigo.setText("");
+            }
+        } catch (StringIndexOutOfBoundsException e) {
         }
     }//GEN-LAST:event_jTCodigoKeyReleased
 
     private void jTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyReleased
-        if (jTNombre.getText().substring(jTNombre.getText().length() - 1).matches("[0-9]")) {
-            JOptionPane.showMessageDialog(this, "No se permiten numeros");
-            jTNombre.setText("");
+        try {
+            if (jTNombre.getText().substring(jTNombre.getText().length() - 1).matches("[0-9]")) {
+                JOptionPane.showMessageDialog(this, "No se permiten numeros");
+                jTNombre.setText("");
+            }
+        } catch (StringIndexOutOfBoundsException e) {
         }
     }//GEN-LAST:event_jTNombreKeyReleased
 
     private void jTAñoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTAñoKeyReleased
-        if (jTAño.getText().substring(jTAño.getText().length() - 1).matches("[aA-zZ]")) {
-            JOptionPane.showMessageDialog(this, "No se permiten letras");
-            jTAño.setText("");
-        }
-        if (jTAño.getText().length() > 4) {
-            JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
-            jTAño.setText("");
+        try {
+            if (jTAño.getText().substring(jTAño.getText().length() - 1).matches("[aA-zZ]")) {
+                JOptionPane.showMessageDialog(this, "No se permiten letras");
+                jTAño.setText("");
+            }
+            if (jTAño.getText().length() > 4) {
+                JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
+                jTAño.setText("");
+            }
+        } catch (StringIndexOutOfBoundsException e) {
         }
     }//GEN-LAST:event_jTAñoKeyReleased
 
