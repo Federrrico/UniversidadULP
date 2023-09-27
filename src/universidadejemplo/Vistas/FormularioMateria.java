@@ -6,7 +6,6 @@
 package universidadejemplo.Vistas;
 
 import java.time.LocalDate;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import universidadejemplo.AccesoADatos.*;
 import universidadejemplo.Entidades.Materia;
@@ -228,32 +227,32 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
 
     private void jTCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCodigoKeyTyped
         int tecla = evt.getKeyChar();
-       boolean numeros = tecla >= 48&& tecla <=57;
+        boolean numeros = tecla >= 48 && tecla <= 57;
         if (!(numeros)) {
             evt.consume();
         }
-        if ((jTCodigo.getText().length()>=4)) {
+        if ((jTCodigo.getText().length() >= 4)) {
             evt.consume();
         }
     }//GEN-LAST:event_jTCodigoKeyTyped
 
     private void jTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyTyped
-          int tecla = evt.getKeyChar();
-         boolean may= tecla >=65 && tecla <=90;
-         boolean min= tecla >= 97 && tecla <=122;
-         boolean esp= tecla == 32;
-         if (!(may||min||esp)) {
+        int tecla = evt.getKeyChar();
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
             evt.consume();
         }
     }//GEN-LAST:event_jTNombreKeyTyped
 
     private void jTAñoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTAñoKeyTyped
-          int tecla = evt.getKeyChar();
-       boolean numeros = tecla >= 48&& tecla <=57;
+        int tecla = evt.getKeyChar();
+        boolean numeros = tecla >= 48 && tecla <= 57;
         if (!(numeros)) {
             evt.consume();
         }
-         if ((jTAño.getText().length()>=4)) {
+        if ((jTAño.getText().length() >= 4)) {
             evt.consume();
         }
     }//GEN-LAST:event_jTAñoKeyTyped

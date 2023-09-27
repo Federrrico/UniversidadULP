@@ -31,7 +31,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         setTitle("Alumnos");
     }
     SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-    
+
 //    recibe jdate retorna string
     private String getFecha(JDateChooser jd) {
         if (jd.getDate() != null) {
@@ -40,7 +40,7 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
             return null;
         }
     }
-    
+
     private void limpiarCampos() {
         jTDocumento.setText("");
         jTApellido.setText("");
@@ -181,10 +181,9 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         AlumnoData a1 = new AlumnoData();
         Alumno al1 = new Alumno();
         String fecha = getFecha(jDateChooser1);
-        try{
+        try {
             if (!jTDocumento.getText().isEmpty() && !jTApellido.getText().isEmpty()
-                    && !jTNombre.getText().isEmpty() && jDateChooser1.isEnabled() && jRadioButton1.isSelected()
-                    ) {
+                    && !jTNombre.getText().isEmpty() && jDateChooser1.isEnabled() && jRadioButton1.isSelected()) {
                 al1.setDni(Integer.parseInt(jTDocumento.getText()));
                 al1.setApellido(jTApellido.getText().toLowerCase());
                 al1.setNombre(jTNombre.getText().toLowerCase());
@@ -195,13 +194,13 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
             }
-        }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(this,"La fecha no ha sido Ingresada!!");
-        }catch(NumberFormatException ex){
-            if(jTDocumento.getText().length() > 8){
-                JOptionPane.showMessageDialog(this,"Excediste los digitos permitidos");
-            }else{
-             JOptionPane.showMessageDialog(this,"Solo tenes que ingresar numeros" +ex.getMessage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "La fecha no ha sido Ingresada!!");
+        } catch (NumberFormatException ex) {
+            if (jTDocumento.getText().length() > 8) {
+                JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
+            } else {
+                JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros" + ex.getMessage());
             }
         }
         limpiarCampos();
@@ -233,48 +232,48 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         jElimiinar.setEnabled(true);
         Alumno alu;
         AlumnoData a1 = new AlumnoData();
-        
+
         try {
-            int dni=Integer.parseInt(jTDocumento.getText());
+            int dni = Integer.parseInt(jTDocumento.getText());
             alu = a1.buscarAlumnoPorDni(dni, 1);
             jTApellido.setText(alu.getApellido());
             jTNombre.setText(alu.getNombre());
             jTDocumento.setText(alu.getDni() + "");
             jRadioButton1.setSelected(true);
             jDateChooser1.setDate(Date.valueOf(alu.getFechaNacimiento()));
-        }  catch (NullPointerException | NumberFormatException nf){
+        } catch (NullPointerException | NumberFormatException nf) {
             jTDocumento.setText("");
             JOptionPane.showMessageDialog(null, "Error al buscar alumno, verifique los datos ingresados");
-        }        
+        }
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jTDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDocumentoKeyTyped
-       int tecla = evt.getKeyChar();
-       boolean numeros = tecla >= 48&& tecla <=57;
+        int tecla = evt.getKeyChar();
+        boolean numeros = tecla >= 48 && tecla <= 57;
         if (!(numeros)) {
             evt.consume();
         }
-        if ((jTDocumento.getText().length()>=11)) {
+        if ((jTDocumento.getText().length() >= 11)) {
             evt.consume();
         }
     }//GEN-LAST:event_jTDocumentoKeyTyped
 
     private void jTApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTApellidoKeyTyped
-         int tecla = evt.getKeyChar();
-         boolean may= tecla >=65 && tecla <=90;
-         boolean min= tecla >= 97 && tecla <=122;
-         boolean esp= tecla == 32;
-         if (!(may||min||esp)) {
+        int tecla = evt.getKeyChar();
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
             evt.consume();
         }
     }//GEN-LAST:event_jTApellidoKeyTyped
 
     private void jTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyTyped
         int tecla = evt.getKeyChar();
-         boolean may= tecla >=65 && tecla <=90;
-         boolean min= tecla >= 97 && tecla <=122;
-         boolean esp= tecla == 32;
-         if (!(may||min||esp)) {
+        boolean may = tecla >= 65 && tecla <= 90;
+        boolean min = tecla >= 97 && tecla <= 122;
+        boolean esp = tecla == 32;
+        if (!(may || min || esp)) {
             evt.consume();
         }
     }//GEN-LAST:event_jTNombreKeyTyped
