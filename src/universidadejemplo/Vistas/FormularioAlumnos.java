@@ -94,22 +94,22 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, 30));
 
         jTDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTDocumentoKeyReleased(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTDocumentoKeyTyped(evt);
             }
         });
         getContentPane().add(jTDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 150, 30));
 
         jTApellido.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTApellidoKeyReleased(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTApellidoKeyTyped(evt);
             }
         });
         getContentPane().add(jTApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 150, 30));
 
         jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTNombreKeyReleased(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTNombreKeyTyped(evt);
             }
         });
         getContentPane().add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 150, 30));
@@ -248,39 +248,36 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         }        
     }//GEN-LAST:event_jBuscarActionPerformed
 
-    private void jTApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTApellidoKeyReleased
-       try{ if (jTApellido.getText().substring(jTApellido.getText().length() - 1).matches("[0-9]")) {
-            JOptionPane.showMessageDialog(this, "No se permiten numeros");
-            jTApellido.setText("");
+    private void jTDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDocumentoKeyTyped
+       int tecla = evt.getKeyChar();
+       boolean numeros = tecla >= 48&& tecla <=57;
+        if (!(numeros)) {
+            evt.consume();
         }
-       }catch(StringIndexOutOfBoundsException e){
-        
+        if ((jTDocumento.getText().length()>=8)) {
+            evt.consume();
         }
-    }//GEN-LAST:event_jTApellidoKeyReleased
+    }//GEN-LAST:event_jTDocumentoKeyTyped
 
-    private void jTDocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDocumentoKeyReleased
-        try {
-            if (jTDocumento.getText().length() > 8) {
-                JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
-                jTDocumento.setText("");
-            }
-            if (jTDocumento.getText().substring(jTDocumento.getText().length() - 1).matches("[aA-zZ]")) {
-                JOptionPane.showMessageDialog(this, "No se permiten letras");
-                jTDocumento.setText("");
-            }
-        } catch (StringIndexOutOfBoundsException e) {
+    private void jTApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTApellidoKeyTyped
+         int tecla = evt.getKeyChar();
+         boolean may= tecla >=65 && tecla <=90;
+         boolean min= tecla >= 97 && tecla <=122;
+         boolean esp= tecla == 32;
+         if (!(may||min||esp)) {
+            evt.consume();
         }
-    }//GEN-LAST:event_jTDocumentoKeyReleased
+    }//GEN-LAST:event_jTApellidoKeyTyped
 
-    private void jTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyReleased
-       try{ if (jTNombre.getText().substring(jTNombre.getText().length() - 1).matches("[0-9]")) {
-            JOptionPane.showMessageDialog(this, "No se permiten numeros");
-            jTNombre.setText("");
-        }  
-       }catch(StringIndexOutOfBoundsException e){
-        
+    private void jTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyTyped
+        int tecla = evt.getKeyChar();
+         boolean may= tecla >=65 && tecla <=90;
+         boolean min= tecla >= 97 && tecla <=122;
+         boolean esp= tecla == 32;
+         if (!(may||min||esp)) {
+            evt.consume();
         }
-    }//GEN-LAST:event_jTNombreKeyReleased
+    }//GEN-LAST:event_jTNombreKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -38,8 +38,8 @@ public class AlumnoData {
             try {
                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, alumno.getDni());
-                ps.setString(2, alumno.getApellido().toLowerCase());
-                ps.setString(3, alumno.getNombre().toLowerCase());
+                ps.setString(2, alumno.getApellido());
+                ps.setString(3, alumno.getNombre());
                 ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
                 ps.setBoolean(5, true);
                 ps.executeUpdate();
@@ -130,8 +130,8 @@ public class AlumnoData {
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, alumno.getDni());
-            ps.setString(2, alumno.getApellido().toLowerCase());
-            ps.setString(3, alumno.getNombre().toLowerCase());
+            ps.setString(2, alumno.getApellido());
+            ps.setString(3, alumno.getNombre());
             ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
             ps.setInt(5, alumno.getIdAlumno());
             int exito = ps.executeUpdate();

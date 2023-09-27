@@ -110,22 +110,22 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 398, -1, -1));
 
         jTCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTCodigoKeyReleased(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTCodigoKeyTyped(evt);
             }
         });
         getContentPane().add(jTCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 210, 108, 30));
 
         jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTNombreKeyReleased(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTNombreKeyTyped(evt);
             }
         });
         getContentPane().add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 251, 108, 30));
 
         jTAño.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTAñoKeyReleased(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTAñoKeyTyped(evt);
             }
         });
         getContentPane().add(jTAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 296, 108, 30));
@@ -226,39 +226,36 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jBGuardarActionPerformed
 
-    private void jTCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCodigoKeyReleased
-        try {
-            if (jTCodigo.getText().substring(jTCodigo.getText().length() - 1).matches("[aA-zZ]")) {
-                JOptionPane.showMessageDialog(this, "No se permiten letras");
-                jTCodigo.setText("");
-            }
-        } catch (StringIndexOutOfBoundsException e) {
+    private void jTCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCodigoKeyTyped
+        int tecla = evt.getKeyChar();
+       boolean numeros = tecla >= 48&& tecla <=57;
+        if (!(numeros)) {
+            evt.consume();
         }
-    }//GEN-LAST:event_jTCodigoKeyReleased
+        if ((jTCodigo.getText().length()>=4)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTCodigoKeyTyped
 
-    private void jTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyReleased
-        try {
-            if (jTNombre.getText().substring(jTNombre.getText().length() - 1).matches("[0-9]")) {
-                JOptionPane.showMessageDialog(this, "No se permiten numeros");
-                jTNombre.setText("");
-            }
-        } catch (StringIndexOutOfBoundsException e) {
+    private void jTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyTyped
+          int tecla = evt.getKeyChar();
+         boolean may= tecla >=65 && tecla <=90;
+         boolean min= tecla >= 97 && tecla <=122;
+         boolean esp= tecla == 32;
+         if (!(may||min||esp)) {
+            evt.consume();
         }
-    }//GEN-LAST:event_jTNombreKeyReleased
+    }//GEN-LAST:event_jTNombreKeyTyped
 
-    private void jTAñoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTAñoKeyReleased
-        try {
-            if (jTAño.getText().substring(jTAño.getText().length() - 1).matches("[aA-zZ]")) {
-                JOptionPane.showMessageDialog(this, "No se permiten letras");
-                jTAño.setText("");
-            }
-            if (jTAño.getText().length() > 4) {
-                JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
-                jTAño.setText("");
-            }
-        } catch (StringIndexOutOfBoundsException e) {
+    private void jTAñoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTAñoKeyTyped
+         int tecla = evt.getKeyChar();
+         boolean numeros = tecla >= 48&& tecla <=57;
+         
+         
+         if ((jTAño.getText().length()>=4)) {
+            evt.consume();
         }
-    }//GEN-LAST:event_jTAñoKeyReleased
+    }//GEN-LAST:event_jTAñoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
