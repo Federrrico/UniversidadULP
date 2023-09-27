@@ -248,10 +248,11 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTNombreKeyTyped
 
     private void jTAñoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTAñoKeyTyped
-         int tecla = evt.getKeyChar();
-         boolean numeros = tecla >= 48&& tecla <=57;
-         
-         
+          int tecla = evt.getKeyChar();
+       boolean numeros = tecla >= 48&& tecla <=57;
+        if (!(numeros)) {
+            evt.consume();
+        }
          if ((jTAño.getText().length()>=4)) {
             evt.consume();
         }
