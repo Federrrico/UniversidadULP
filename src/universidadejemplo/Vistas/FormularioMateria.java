@@ -199,19 +199,27 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         MateriaData a1 = new MateriaData();
         Materia al1 = new Materia();
-        try {
-            if (!jTNombre.getText().isEmpty() && jRBEstado.isSelected()
-                    && !jTAño.getText().isEmpty()) {
-                al1.setNombre(jTNombre.getText().toLowerCase());
-                al1.setAño(Integer.parseInt(jTAño.getText()));
-                al1.setEstado(true);
-                a1.guardarMateria(al1);
-            } else {
-                JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
+        if (jTAño.getText().length() == 4) {
+            try {
+                if (!jTNombre.getText().isEmpty() && jRBEstado.isSelected()
+                        && !jTAño.getText().isEmpty()) {
+                    al1.setNombre(jTNombre.getText().toLowerCase());
+                    al1.setAño(Integer.parseInt(jTAño.getText()));
+                    al1.setEstado(true);
+                    a1.guardarMateria(al1);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Tenes que completar todos los campos");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros");
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros");
+        }else {
+            JOptionPane.showMessageDialog(this, "Verifique la fecha ingresada, ej: 2000");
+            jTAño.setText("");
+            jTNombre.setText("");
+            jRBEstado.setSelected(false);
         }
+
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jTCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCodigoKeyReleased
