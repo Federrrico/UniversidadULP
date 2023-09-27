@@ -26,6 +26,8 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
      */
     public FormularioAlumnos() {
         initComponents();
+        jBGuardar.setEnabled(false);
+        jElimiinar.setEnabled(false);
         setTitle("Alumnos");
     }
     SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -92,12 +94,24 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, 30));
 
         jTDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTDocumentoKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTDocumentoKeyReleased(evt);
             }
         });
         getContentPane().add(jTDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 150, 30));
+
+        jTApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTApellidoKeyReleased(evt);
+            }
+        });
         getContentPane().add(jTApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 150, 30));
+
+        jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTNombreKeyReleased(evt);
+            }
+        });
         getContentPane().add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 150, 30));
         getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, -1, 30));
 
@@ -167,14 +181,13 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         AlumnoData a1 = new AlumnoData();
         Alumno al1 = new Alumno();
         String fecha = getFecha(jDateChooser1);
-        int prueba;
         try{
             if (!jTDocumento.getText().isEmpty() && !jTApellido.getText().isEmpty()
                     && !jTNombre.getText().isEmpty() && jDateChooser1.isEnabled() && jRadioButton1.isSelected()
                     ) {
                 al1.setDni(Integer.parseInt(jTDocumento.getText()));
-                al1.setApellido(jTApellido.getText());
-                al1.setNombre(jTNombre.getText());
+                al1.setApellido(jTApellido.getText().toLowerCase());
+                al1.setNombre(jTNombre.getText().toLowerCase());
                 al1.setEstado(true);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 al1.setFechaNacimiento(LocalDate.parse(fecha, dtf));
@@ -192,10 +205,12 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
             }
         }
         limpiarCampos();
+        jBGuardar.setEnabled(false);
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
         limpiarCampos();
+        jBGuardar.setEnabled(true);
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -211,10 +226,11 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Verifique los datos ingresados e intente nuevamente");
         }
         limpiarCampos();
+        jElimiinar.setEnabled(false);
     }//GEN-LAST:event_jElimiinarActionPerformed
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-        
+        jElimiinar.setEnabled(true);
         Alumno alu;
         AlumnoData a1 = new AlumnoData();
         
@@ -232,13 +248,31 @@ public class FormularioAlumnos extends javax.swing.JInternalFrame {
         }        
     }//GEN-LAST:event_jBuscarActionPerformed
 
-    private void jTDocumentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDocumentoKeyPressed
-          
-        if(jTDocumento.getText().length() > 8){
-                JOptionPane.showMessageDialog(this,"Excediste los digitos permitidos");
-                jTDocumento.setText("");
-            }
-    }//GEN-LAST:event_jTDocumentoKeyPressed
+    private void jTApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTApellidoKeyReleased
+        if (jTApellido.getText().substring(jTApellido.getText().length() - 1).matches("[0-9]")) {
+            JOptionPane.showMessageDialog(this, "No se permiten numeros");
+            jTApellido.setText("");
+        }
+    }//GEN-LAST:event_jTApellidoKeyReleased
+
+    private void jTDocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDocumentoKeyReleased
+        if (jTDocumento.getText().length() > 8) {
+            JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
+            jTDocumento.setText("");
+        }
+        
+        if (jTDocumento.getText().substring(jTDocumento.getText().length() - 1).matches("[aA-zZ]")) {
+            JOptionPane.showMessageDialog(this, "No se permiten letras");
+            jTDocumento.setText("");
+        }
+    }//GEN-LAST:event_jTDocumentoKeyReleased
+
+    private void jTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyReleased
+        if (jTNombre.getText().substring(jTNombre.getText().length() - 1).matches("[0-9]")) {
+            JOptionPane.showMessageDialog(this, "No se permiten numeros");
+            jTNombre.setText("");
+        }
+    }//GEN-LAST:event_jTNombreKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

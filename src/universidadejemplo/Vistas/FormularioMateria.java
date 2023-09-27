@@ -106,8 +106,26 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(323, 398, -1, -1));
+
+        jTCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTCodigoKeyReleased(evt);
+            }
+        });
         getContentPane().add(jTCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 210, 108, 30));
+
+        jTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTNombreKeyReleased(evt);
+            }
+        });
         getContentPane().add(jTNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 251, 108, 30));
+
+        jTAño.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTAñoKeyReleased(evt);
+            }
+        });
         getContentPane().add(jTAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 296, 108, 30));
         getContentPane().add(jRBEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, -1));
 
@@ -184,7 +202,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         try {
             if (!jTNombre.getText().isEmpty() && jRBEstado.isSelected()
                     && !jTAño.getText().isEmpty()) {
-                al1.setNombre(jTNombre.getText());
+                al1.setNombre(jTNombre.getText().toLowerCase());
                 al1.setAño(Integer.parseInt(jTAño.getText()));
                 al1.setEstado(true);
                 a1.guardarMateria(al1);
@@ -195,6 +213,31 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Solo tenes que ingresar numeros");
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jTCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTCodigoKeyReleased
+        if (jTCodigo.getText().substring(jTCodigo.getText().length() - 1).matches("[aA-zZ]")) {
+            JOptionPane.showMessageDialog(this, "No se permiten letras");
+            jTCodigo.setText("");
+        }
+    }//GEN-LAST:event_jTCodigoKeyReleased
+
+    private void jTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreKeyReleased
+        if (jTNombre.getText().substring(jTNombre.getText().length() - 1).matches("[0-9]")) {
+            JOptionPane.showMessageDialog(this, "No se permiten numeros");
+            jTNombre.setText("");
+        }
+    }//GEN-LAST:event_jTNombreKeyReleased
+
+    private void jTAñoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTAñoKeyReleased
+        if (jTAño.getText().substring(jTAño.getText().length() - 1).matches("[aA-zZ]")) {
+            JOptionPane.showMessageDialog(this, "No se permiten letras");
+            jTAño.setText("");
+        }
+        if (jTAño.getText().length() > 4) {
+            JOptionPane.showMessageDialog(this, "Excediste los digitos permitidos");
+            jTAño.setText("");
+        }
+    }//GEN-LAST:event_jTAñoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
